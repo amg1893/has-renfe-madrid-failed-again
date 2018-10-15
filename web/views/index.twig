@@ -20,7 +20,7 @@ window.onload = function() {
 
     {% for hashtag in hashtags %}
         {% if hashtag['last_id'] is not empty %}
-                twttr.widgets.createTweet(
+                window.twttr.widgets.createTweet(
                     "{{ hashtag['last_id'] }}",
                     document.getElementById("tweet{{ hashtag['hashtag'] }}"),
                 );
