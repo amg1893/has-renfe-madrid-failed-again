@@ -1,31 +1,14 @@
+<script src="https://platform.twitter.com/widgets.js"></script>
 <script>
 window.onload = function() {
-    window.twttr = (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0],
-        t = window.twttr || {};
-    if (d.getElementById(id)) return t;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://platform.twitter.com/widgets.js";
-    fjs.parentNode.insertBefore(js, fjs);
-
-    t._e = [];
-    t.ready = function(f) {
-        t._e.push(f);
-    };
-
-
     {% for hashtag in hashtags %}
         {% if hashtag['last_id'] is not empty %}
-                t.widgets.createTweet(
+                twttr.widgets.createTweet(
                     "{{ hashtag['last_id'] }}",
                     document.getElementById("tweet{{ hashtag['hashtag'] }}"),
                 );
         {% endif %}
     {% endfor %}
-
-    return t;
-    }(document, "script", "twitter-wjs"));
 };
 </script>
 
