@@ -89,7 +89,7 @@ $app->get('/update', function () use ($app) {
         $query->execute();
     }
 
-    $app->json(['result' => true]);
+    return $app->json(['result' => true]);
 });
 
 $app->run();
