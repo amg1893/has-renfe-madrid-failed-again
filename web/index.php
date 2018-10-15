@@ -39,7 +39,7 @@ $app->get('/', function () use ($app) {
 
 $app->get('/update', function () use ($app) {
     $app['monolog']->addDebug('connecting to twitter.');
-    $conn = new Abraham\TwitterOAuth\TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET);
+    $conn = new Abraham\TwitterOAuth\TwitterOAuth(getenv('CONSUMER_KEY'), getenv('CONSUMER_SECRET'), getenv('ACCESS_TOKEN'), getenv('ACCESS_SECRET'));
     $app['monolog']->addDebug('getting latest ID.');
     $lastTweet = $app['db']->fetchAll('SELECT last_id, date FROM latest');
     $lastTweetID = $lastTweet['last_id'];
