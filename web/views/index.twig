@@ -14,18 +14,18 @@ window.onload = function() {
         t._e.push(f);
     };
 
-    return t;
-    }(document, "script", "twitter-wjs"));
-
 
     {% for hashtag in hashtags %}
         {% if hashtag['last_id'] is not empty %}
-                window.twttr.widgets.createTweet(
+                t.widgets.createTweet(
                     "{{ hashtag['last_id'] }}",
                     document.getElementById("tweet{{ hashtag['hashtag'] }}"),
                 );
         {% endif %}
     {% endfor %}
+
+    return t;
+    }(document, "script", "twitter-wjs"));
 };
 </script>
 
