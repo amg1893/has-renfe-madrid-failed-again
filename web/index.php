@@ -33,7 +33,7 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 
 $app->get('/', function () use ($app) {
     $app['monolog']->addDebug('logging output.');
-    $hashtags = $app['db']->fetchAssoc('SELECT * FROM hashtag_status');
+    $hashtags = $app['db']->fetchAll('SELECT * FROM hashtag_status');
     return $app['twig']->render('index.twig', ['hashtags' => $hashtags]);
 });
 
@@ -41,11 +41,11 @@ $app->get('/update', function () use ($app) {
     $app['monolog']->addDebug('connecting to twitter.');
     $conn = new Abraham\TwitterOAuth\TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET);
     $app['monolog']->addDebug('getting latest ID.');
-    $lastTweet = $app['db']->fetchAssoc('SELECT last_id, date FROM latest');
+    $lastTweet = $app['db']->fetchAll('SELECT last_id, date FROM latest');
     $lastTweetID = $lastTweet['last_id'];
     $lastTweetDate = Datetime::createFromFormat('M j H:i:s P Y', $lastTweet['date']);
     $app['monolog']->addDebug('getting hashtags to follow.');
-    $hashtags = $app['db']->fetchAssoc('SELECT * FROM hashtag_status');
+    $hashtags = $app['db']->fetchAll('SELECT * FROM hashtag_status');
     $tempHashtags = [];
     foreach ($hashtags as $hashtag) {
         $tempHashtags[$hashtag['hashtag']] = $hashtag;
