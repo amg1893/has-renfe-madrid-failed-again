@@ -52,19 +52,19 @@ $app->get('/update', function () use ($app) {
     }
     $hashtags = $tempHashtags;
     $app['monolog']->addDebug('getting tweets.');
-    $content = $conn->get('statuses/user_timelines', [
+    $content = $conn->get('statuses/user_timeline', [
         'screen_name' => 'cercaniasmadrid',
         'since_id' => $lastTweetID,
         'exclude_replies' => true,
         'include_rts' => false,
     ]);
     foreach ($content as $tweet) {
-        $dateTweet = Datetime::createFromFormat('M j H:i:s P Y', $tweet['created_at']);
+        $dateTweet = Datetime::createFromFormat('M j H:i:s P Y', $tweet->created_at);
         if ($dateTweet > $lastTweetDate) {
-            $lastTweetID = $tweet['id'];
+            $lastTweetID = $tweet->id;
             $lastTweetDate = $dateTweet;
         }
-        if ($hashes = array_intersect($hashtagsArray, $tweet['entities']['hashtags'])) {
+        if ($hashes = array_intersect($hashtagsArray, $tweet->entities->hashtags)) {
             foreach ($hashes as $hash) {
                 $hashtags[$hash]['last_id'] = $lastTweetID;
                 $hashtags[$hash]['date_tweet'] = $lastTweetDate->format('M j H:i:s P Y');
