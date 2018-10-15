@@ -65,7 +65,11 @@ $app->get('/update', function () use ($app) {
         'since_id' => $lastTweetID,
         'exclude_replies' => true,
         'include_rts' => false,
+        'count' => 200,
     ]);
+    usort($content, function ($a, $b) {
+        return Datetime::createFromFormat('M j H:i:s P Y', $a->created_at) <=> Datetime::createFromFormat('M j H:i:s P Y', $b->created_at);
+    });
     foreach ($content as $tweet) {
         $dateTweet = Datetime::createFromFormat('M j H:i:s P Y', $tweet->created_at);
         if ($dateTweet > $lastTweetDate) {
