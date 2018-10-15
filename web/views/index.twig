@@ -18,11 +18,15 @@
 <h1>Has Renfe Madrid failed again?</h1>
 {% for hashtag in hashtags %}
     <p>{{ hashtag['hashtag'] }} - Last Updated: {{ hashtag['update_time'] }}</p>
+    {% if hashtag['last_id'] is not empty %}
     <span id="tweet{{ hashtag['hashtag'] }}"></span>
     <script>
         twttr.widgets.createTweet(
             "{{ hashtag['last_id'] }}",
-            document.getElementById("tweet-container"),
+            document.getElementById("tweet{{ hashtag['hashtag'] }}"),
         );
     </script>
+    {% else %}
+    <p>No data for this hashtag</p>
+    {% endif %}
 {% endfor %}
