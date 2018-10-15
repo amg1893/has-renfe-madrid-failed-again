@@ -34,12 +34,6 @@ window.onload = function() {
     <p>{{ hashtag['hashtag'] }} - Last Updated: {{ hashtag['update_date'] }}</p>
     {% if hashtag['last_id'] is not empty %}
         <span id="tweet{{ hashtag['hashtag'] }}"></span>
-        <script>
-            twttr.widgets.createTweet(
-                "{{ hashtag['last_id'] }}",
-                document.getElementById("tweet{{ hashtag['hashtag'] }}"),
-            );
-        </script>
     {% else %}
         <p>No data for this hashtag</p>
     {% endif %}
