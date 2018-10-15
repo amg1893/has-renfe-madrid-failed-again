@@ -51,7 +51,7 @@ $app->get('/update', function () use ($app) {
     $app['monolog']->addDebug('getting latest ID.');
     $lastTweet = $app['db']->fetchAssoc('SELECT last_id, date_tweet FROM latest');
     $lastTweetID = $lastTweet['last_id'];
-    $lastTweetDate = Datetime::createFromFormat('M j H:i:s P Y', $lastTweet['date_tweet']);
+    $lastTweetDate = new Datetime($lastTweet['date_tweet']);
     $app['monolog']->addDebug('getting hashtags to follow.');
     $hashtags = $app['db']->fetchAll('SELECT * FROM hashtag_status');
     $tempHashtags = [];
@@ -68,10 +68,10 @@ $app->get('/update', function () use ($app) {
         'count' => 200,
     ]);
     usort($content, function ($a, $b) {
-        return Datetime::createFromFormat('M j H:i:s P Y', $a->created_at) <=> Datetime::createFromFormat('M j H:i:s P Y', $b->created_at);
+        return new Datetime($a->created_at) <=> new Datetime($b->created_at);
     });
     foreach ($content as $tweet) {
-        $dateTweet = Datetime::createFromFormat('M j H:i:s P Y', $tweet->created_at);
+        $dateTweet = new Datetime($tweet->created_at);
         if ($dateTweet > $lastTweetDate) {
             $lastTweetID = $tweet->id;
             $lastTweetDate = $dateTweet;
