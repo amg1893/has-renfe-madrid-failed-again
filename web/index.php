@@ -64,7 +64,7 @@ $app->get('/update', function () use ($app) {
             $lastTweetID = $tweet->id;
             $lastTweetDate = $dateTweet;
         }
-        if ($hashes = array_intersect($hashtagsArray, $tweet->entities->hashtags)) {
+        if ($hashes = array_intersect(array_keys($hashtags), $tweet->entities->hashtags)) {
             foreach ($hashes as $hash) {
                 $hashtags[$hash]['last_id'] = $lastTweetID;
                 $hashtags[$hash]['date_tweet'] = $lastTweetDate->format('M j H:i:s P Y');
