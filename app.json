@@ -1,6 +1,6 @@
 {
-  "name": "Start on Heroku: PHP",
-  "description": "A barebones PHP app that makes use of the Silex web framework",
+  "name": "Has Renfe Cercanias Madrid failed again?",
+  "description": "A website that records how many times since 2018-10-15 Renfe Cercanias Madrid has failed.",
   "repository": "https://github.com/heroku/php-getting-started",
   "addons": []
 }
