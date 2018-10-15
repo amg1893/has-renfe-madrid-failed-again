@@ -42,7 +42,8 @@ $app->get('/update', function () use ($app) {
     $conn = new Abraham\TwitterOAuth\TwitterOAuth(getenv('CONSUMER_KEY'), getenv('CONSUMER_SECRET'), getenv('ACCESS_TOKEN'), getenv('ACCESS_SECRET'));
     $app['monolog']->addDebug('getting latest ID.');
     $lastTweet = $app['db']->fetchAssoc('SELECT last_id, date_tweet FROM latest');
-    $lastTweetDate = Datetime::createFromFormat('M j H:i:s P Y', $lastTweet['date']);
+    $lastTweetID = $lastTweet['last_id'];
+    $lastTweetDate = Datetime::createFromFormat('M j H:i:s P Y', $lastTweet['date_tweet']);
     $app['monolog']->addDebug('getting hashtags to follow.');
     $hashtags = $app['db']->fetchAll('SELECT * FROM hashtag_status');
     $tempHashtags = [];
