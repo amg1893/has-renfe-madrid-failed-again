@@ -18,6 +18,14 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__ . '/views',
 ));
 
+set_error_handler(function ($errno, $errstr, $errfile, $errline) use ($app) {
+    $app['monolog']->addError($errstr . ' (' . $errno . ') - ' . $errfile . ':' . $errline);
+});
+
+set_exception_handler(function (\Throwable $exception) use ($app) {
+    $app['monolog']->addError($exception->getMessage() . ' (' . $exception->getCode() . ') - ' . $exception->getFile() . ':' . $exception->getLine());
+});
+
 // Register MySQL
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => [
