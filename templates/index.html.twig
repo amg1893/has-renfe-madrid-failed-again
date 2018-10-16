@@ -1,0 +1,53 @@
+{% block body %}
+<h1>Has Renfe Madrid failed again?</h1>
+<p><span id="update">Update</span></p>
+{% for hashtag in hashtags %}
+    <p>{{ hashtag['name'] }} - Last Updated: <span id="updateDate{{ hashtag['hashtag'] }}">{{ hashtag['update_date'] }}</span></p>
+    {% if hashtag['last_id'] is not empty %}
+        <span id="tweet{{ hashtag['hashtag'] }}"></span>
+        <script>
+          twttr.widgets.createTweet(
+            "{{ hashtag['last_id'] }}",
+            document.getElementById("tweet{{ hashtag['hashtag'] }}"),
+          );
+        </script>
+    {% else %}
+        <span id="tweet{{ hashtag['hashtag'] }}"><p>No data for this hashtag</p></span>
+    {% endif %}
+{% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+<script>
+  document.getElementById('update').onclick = function() {
+    axios.get('/update')
+      .then(function(res) {
+        var updateRes = res.data;
+        if (updateRes.result) {
+          console.log('updated, getting new tweets');
+          axios.get('/', {
+            'headers': {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }
+          })
+            .then(function(res){
+              var getRes = res.data;
+              getRes.hashtags.forEach(function(hashtag) {
+                document.getElementById('updateDate'+hashtag.hashtag).innerHTML = hashtag.update_date;
+                document.getElementById("tweet"+hashtag.hashtag).innerHTML = '';
+                if (hashtag.last_id) {
+                  twttr.widgets.createTweet(
+                    hashtag.last_id,
+                    document.getElementById("tweet"+hashtag.hashtag),
+                  );
+                } else {
+                  document.getElementById("tweet"+hashtag.hashtag).innerHTML = '<p>No data for this hashtag</p>';
+                }
+              });
+            });
+        }
+      });
+  }
+</script>
+{% endblock %}
