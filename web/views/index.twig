@@ -23,7 +23,7 @@ document.getElementById('update').onclick = function() {
     axios.get('/update')
         .then(function(res) {
             var updateRes = res.data;
-            if (updateRes.result == 'true') {
+            if (updateRes.result) {
                 console.log('updated, getting new tweets');
                 axios.get('/', {
                     'headers': {
