@@ -36,10 +36,14 @@ document.getElementById('update').onclick = function() {
                         getRes.hashtags.forEach(function(hashtag) {
                             document.getElementById('updateDate'+hashtag.hashtag).innerHTML = hashtag.update_date;
                             document.getElementById("tweet"+hashtag.hashtag).innerHTML = '';
-                            twttr.widgets.createTweet(
-                                hashtag.last_id,
-                                document.getElementById("tweet"+hashtag.hashtag),
-                            );
+                            if (hashtag.last_id) {
+                                twttr.widgets.createTweet(
+                                    hashtag.last_id,
+                                    document.getElementById("tweet"+hashtag.hashtag),
+                                );
+                            } else {
+                                document.getElementById("tweet"+hashtag.hashtag).innerHTML = '<p>No data for this hashtag</p>';
+                            }
                         });
                     });
             }
