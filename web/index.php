@@ -71,7 +71,7 @@ $app->get('/update', function () use ($app) {
         'include_rts' => false,
         'count' => 200,
     ]);
-    if ($content->errors) {
+    if (property_exists($content, 'errors')) {
         return $app->json(['result' => false]);
     }
     $content = array_filter($content, function ($tweet) {
