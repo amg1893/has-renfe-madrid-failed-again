@@ -71,6 +71,9 @@ $app->get('/update', function () use ($app) {
         'include_rts' => false,
         'count' => 200,
     ]);
+    if ($content->errors) {
+        return $app->json(['result' => false]);
+    }
     $content = array_filter($content, function ($tweet) {
         $flag = true;
         foreach ($tweet->entities->user_mentions as $userMention) {
