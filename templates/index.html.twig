@@ -4,7 +4,7 @@
 <h1>Has Renfe Madrid failed again?</h1>
 <p><span id="update">Update</span></p>
 {% for hashtag in hashtags %}
-    <p>{{ hashtag['name'] }} - Last Updated: <span id="updateDate{{ hashtag['hashtag'] }}">{{ hashtag['update_date'] }}</span></p>
+    <p>{{ hashtag['name'] }} - Last Updated: <span id="updateTime{{ hashtag['hashtag'] }}">{{ hashtag['updateTime'] }}</span></p>
     {% if hashtag['last_id'] is not empty %}
         <span id="tweet{{ hashtag['hashtag'] }}"></span>
         <script>
@@ -36,7 +36,7 @@
             .then(function(res){
               var getRes = res.data;
               getRes.hashtags.forEach(function(hashtag) {
-                document.getElementById('updateDate'+hashtag.hashtag).innerHTML = hashtag.update_date;
+                document.getElementById('updateTime'+hashtag.hashtag).innerHTML = hashtag.updateTime;
                 document.getElementById("tweet"+hashtag.hashtag).innerHTML = '';
                 if (hashtag.last_id) {
                   twttr.widgets.createTweet(
