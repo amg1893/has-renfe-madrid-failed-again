@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\HashtagStatus;
+use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
