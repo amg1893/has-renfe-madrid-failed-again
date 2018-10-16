@@ -22,7 +22,7 @@
 document.getElementById('update').onclick = function() {
     axios.get('/update')
         .then(function(res) {
-            var updateRes = JSON.parse(res);
+            var updateRes = res.data;
             if (updateRes.result == 'true') {
                 console.log('updated, getting new tweets');
                 axios.get('/', {
@@ -31,7 +31,7 @@ document.getElementById('update').onclick = function() {
                     }
                 })
                     .then(function(res){
-                        var getRes = JSON.parse(res);
+                        var getRes = res.data;
                         getRes.hashtags.forEach(function(hashtag) {
                             document.getElementById('updateDate'+hashtag.hashtag).text = hashtag.update_date;
                             twttr.widgets.createTweet(
