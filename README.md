@@ -1,28 +1,31 @@
-# php-getting-started
+# Has Renfe Madrid failed again?
 
-A barebones PHP app that makes use of the [Silex](http://silex.sensiolabs.org/) web framework, which can easily be deployed to Heroku.
+This application provides you information about the Cercanias Madrid line status based on the tweets.
 
-This application supports the [Getting Started with PHP on Heroku](https://devcenter.heroku.com/articles/getting-started-with-php) article - check it out.
+## Requirements
 
-## Deploying
+This application requires a MySQL database. The structure and basic data are provided inside the _sql_ folder.
 
-Install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
+## Installation
 
-```sh
-$ git clone git@github.com:heroku/php-getting-started.git # or clone your own fork
-$ cd php-getting-started
-$ heroku create
-$ git push heroku master
-$ heroku open
+```
+composer install
+php -S localhost:9000 -t web
 ```
 
-or
+## Changelog
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+### 0.0.3
 
-## Documentation
+To-Do:
+- Create words list to determine the status of the line.
 
-For more information about using PHP on Heroku, see these Dev Center articles:
+### 0.0.2
 
-- [Getting Started with PHP on Heroku](https://devcenter.heroku.com/articles/getting-started-with-php)
-- [PHP on Heroku](https://devcenter.heroku.com/categories/php)
+To-Do:
+- Change to Flex (update Symfony)
+
+### 0.0.1
+
+- Checks tweets from @cercaniasmadrid with the hashtags from database.
+- Silex base.

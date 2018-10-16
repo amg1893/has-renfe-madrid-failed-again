@@ -1,4 +1,6 @@
 {
+  "name": "has-renfe-madrid-failed-again",
+  "description": "Provides information about Renfe Cercanias Madrid line status",
   "require" : {
     "silex/silex": "^2.0.4",
     "monolog/monolog": "^1.22",

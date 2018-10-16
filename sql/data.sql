@@ -1,0 +1,2 @@
+insert into latest values (1050702113813213185, 'Mon Oct 12 00:00:00 +0000 2018');
+insert into hashtag_status values ('C1', 'MadC1', null, null, null), ('C2', 'MadC2', null, null, null), ('C3', 'MadC3', null, null, null), ('C4', 'MadC4', null, null, null), ('C5', 'MadC5', null, null, null), ('C6', 'MadC6', null, null, null), ('C7', 'MadC7', null, null, null), ('C8', 'MadC8', null, null, null), ('C9', 'MadC9', null, null, null), ('C10', 'MadC10', null, null, null);
