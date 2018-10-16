@@ -19,7 +19,7 @@ class IndexController extends AbstractController
                 'hashtags' => $hashtags
             ]);
         }
-        return $this->render('index.html', [
+        return $this->render('index.html.twig', [
             'hashtags' => $hashtags
         ]);
     }
