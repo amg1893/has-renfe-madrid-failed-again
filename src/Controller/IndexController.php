@@ -14,6 +14,9 @@ class IndexController extends AbstractController
     {
         $this->logger->info('Obtaining data.');
         $hashtags = $this->getDoctrine()->getRepository(HashtagStatus::class)->findAll();
+        $hashtags = array_map(function ($hashtag) {
+            return $hashtag->toArray();
+        }, $hashtags);
         if ($this->request->headers->get('Accept') === 'application/json') {
             return $this->json([
                 'hashtags' => $hashtags
