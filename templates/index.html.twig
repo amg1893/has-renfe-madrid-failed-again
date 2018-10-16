@@ -5,11 +5,11 @@
 <p><span id="update">Update</span></p>
 {% for hashtag in hashtags %}
     <p>{{ hashtag['name'] }} - Last Updated: <span id="updateTime{{ hashtag['hashtag'] }}">{{ hashtag['updateTime'] }}</span></p>
-    {% if hashtag['last_id'] is not empty %}
+    {% if hashtag['lastId'] is not empty %}
         <span id="tweet{{ hashtag['hashtag'] }}"></span>
         <script>
           twttr.widgets.createTweet(
-            "{{ hashtag['last_id'] }}",
+            "{{ hashtag['lastId'] }}",
             document.getElementById("tweet{{ hashtag['hashtag'] }}"),
           );
         </script>
@@ -38,9 +38,9 @@
               getRes.hashtags.forEach(function(hashtag) {
                 document.getElementById('updateTime'+hashtag.hashtag).innerHTML = hashtag.updateTime;
                 document.getElementById("tweet"+hashtag.hashtag).innerHTML = '';
-                if (hashtag.last_id) {
+                if (hashtag.lastId) {
                   twttr.widgets.createTweet(
-                    hashtag.last_id,
+                    hashtag.lastId,
                     document.getElementById("tweet"+hashtag.hashtag),
                   );
                 } else {
