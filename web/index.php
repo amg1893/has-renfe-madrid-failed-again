@@ -63,24 +63,29 @@ $app->get('/update', function () use ($app) {
     $content = $conn->get('statuses/user_timeline', [
         'screen_name' => 'cercaniasmadrid',
         'since_id' => $lastTweetID,
-        'exclude_replies' => true,
+        'exclude_replies' => false,
         'include_rts' => false,
         'count' => 200,
     ]);
+    $content = array_filter($content, function ($tweet) {
+        $flag = true;
+        foreach ($tweet->entities->user_mentions as $userMention) {
+            if ($userMention->name !== 'cercaniasmadrid') {
+                $flag = false;
+                break;
+            }
+        }
+        return $flag;
+    });
     usort($content, function ($a, $b) {
         return new Datetime($a->created_at) <=> new Datetime($b->created_at);
     });
     foreach ($content as $tweet) {
-        $dateTweet = new Datetime($tweet->created_at);
-        if ($dateTweet > $lastTweetDate) {
-            $lastTweetID = $tweet->id;
-            $lastTweetDate = $dateTweet;
-        }
         $tweetHashtags = array_map(function ($value) {return $value->text;}, $tweet->entities->hashtags);
         if ($hashes = array_intersect(array_keys($hashtags), $tweetHashtags)) {
             foreach ($hashes as $hash) {
-                $hashtags[$hash]['last_id'] = $lastTweetID;
-                $hashtags[$hash]['date_tweet'] = $lastTweetDate->format('M j H:i:s P Y');
+                $hashtags[$hash]['last_id'] = $tweet->id;
+                $hashtags[$hash]['date_tweet'] = $tweet->created_at;
             }
         }
     }
@@ -93,6 +98,11 @@ $app->get('/update', function () use ($app) {
         $query->bindValue('hashtag', $hashtag);
         $query->execute();
     }
+    $lastTweet = end($content);
+    $lastTweetQuery = $app['db']->prepare('UPDATE latest SET last_id = :lastId, date_tweet = :dateTweet');
+    $lastTweetQuery->bindValue('lastId', $lastTweet->id);
+    $lastTweetQuery->bindValue('dateTweet', $lastTweet->created_at);
+    $lastTweetQuery->execute();
 
     return $app->json(['result' => true]);
 });
