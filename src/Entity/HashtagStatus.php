@@ -105,4 +105,9 @@ class HashtagStatus extends AbstractEntity
 
         return $this;
     }
+
+    public function updateTime(): void
+    {
+        $this->setUpdateTime(new \DateTime());
+    }
 }
