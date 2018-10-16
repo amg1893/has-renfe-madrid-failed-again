@@ -39,10 +39,14 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 
 // Our web handlers
 
-$app->get('/', function () use ($app) {
+$app->get('/', function (\Symfony\Component\HttpFoundation\Request $request) use ($app) {
     $app['monolog']->addDebug('logging output.');
     $hashtags = $app['db']->fetchAll('SELECT * FROM hashtag_status');
-    return $app['twig']->render('index.twig', ['hashtags' => $hashtags]);
+    $ret = ['hashtags' => $hashtags];
+    if ($request->getContentType() === 'application/json') {
+        return $app->json($ret);
+    }
+    return $app['twig']->render('index.twig', $ret);
 });
 
 $app->get('/update', function () use ($app) {
