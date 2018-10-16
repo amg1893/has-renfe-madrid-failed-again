@@ -27,7 +27,8 @@ document.getElementById('update').onclick = function() {
                 console.log('updated, getting new tweets');
                 axios.get('/', {
                     'headers': {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     }
                 })
                     .then(function(res){

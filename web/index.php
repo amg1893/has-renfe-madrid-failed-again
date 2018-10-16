@@ -43,7 +43,7 @@ $app->get('/', function (\Symfony\Component\HttpFoundation\Request $request) use
     $app['monolog']->addDebug('logging output.');
     $hashtags = $app['db']->fetchAll('SELECT * FROM hashtag_status');
     $ret = ['hashtags' => $hashtags];
-    if ($request->getContentType() === 'application/json') {
+    if ($request->getAcceptableContentTypes() === 'application/json') {
         return $app->json($ret);
     }
     return $app['twig']->render('index.twig', $ret);
