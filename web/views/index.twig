@@ -35,6 +35,7 @@ document.getElementById('update').onclick = function() {
                         var getRes = res.data;
                         getRes.hashtags.forEach(function(hashtag) {
                             document.getElementById('updateDate'+hashtag.hashtag).innerHTML = hashtag.update_date;
+                            document.getElementById("tweet"+hashtag.hashtag).innerHTML = '';
                             twttr.widgets.createTweet(
                                 hashtag.last_id,
                                 document.getElementById("tweet"+hashtag.hashtag),
