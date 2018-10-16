@@ -19,7 +19,7 @@ class IndexController extends AbstractController
                 'hashtags' => $hashtags
             ]);
         }
-        return $this->render('index', [
+        return $this->render('index.html', [
             'hashtags' => $hashtags
         ]);
     }
