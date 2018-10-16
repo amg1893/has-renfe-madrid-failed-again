@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\HashtagStatusRepository")
  */
-class HashtagStatus
+class HashtagStatus extends AbstractEntity
 {
     /**
      * @ORM\Id()

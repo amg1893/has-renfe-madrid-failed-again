@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LatestRepository")
  */
-class Latest
+class Latest extends AbstractEntity
 {
     /**
      * @ORM\Id()
