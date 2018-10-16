@@ -69,7 +69,7 @@ $app->get('/update', function () use ($app) {
         'since_id' => $lastTweetID,
         'exclude_replies' => false,
         'include_rts' => false,
-        'count' => 200,
+        'count' => 500,
     ]);
     if (!is_array($content) && property_exists($content, 'errors')) {
         return $app->json(['result' => false]);
