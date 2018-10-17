@@ -11,15 +11,25 @@
         <h1>Has Renfe Madrid failed again?</h1>
         <button class="pure-button pure-button-primary" id="update"><i id="updateIcon" class="fa fa-refresh"></i> Update</button>
     </div>
-    <div>
+    <div class="hashtags">
         {% for hashtag in hashtags %}
             <div class="hashtag pure-u-1 pure-u-lg-1-2">
-                <p>{{ hashtag['name'] }} - Last Updated: <span id="updateTime{{ hashtag['hashtag'] }}">{{ hashtag['updateTime'] | date('Y-m-d H:i:s') }}</span></p>
-                {% if hashtag['lastId'] is not empty %}
-                    <div id="tweet{{ hashtag['hashtag'] }}"></div>
-                {% else %}
-                    <div id="tweet{{ hashtag['hashtag'] }}"><p>No data for this hashtag</p></div>
-                {% endif %}
+                <div class="card">
+                    <span>{{ hashtag['name'] }}</span>
+                    {% if hashtag['lastId'] is not empty %}
+                        {% if hashtag['status'] == 0 %}
+                            <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fas fa-check-circle"></i> All seems fine!</p>
+                        {% elseif hashtag['status'] == 1 %}
+                            <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fas fa-ban"></i> Uh-oh! Bad timing to take this line</p>
+                        {% else %}
+                            <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fas fa-question-circle"></i> I can't see if the line is right or wrong...</p>
+                        {% endif %}
+                        <div id="tweet{{ hashtag['hashtag'] }}"></div>
+                    {% else %}
+                        <div id="tweet{{ hashtag['hashtag'] }}"><p>No data for this hashtag</p></div>
+                    {% endif %}
+                    <span class="lastUpdate">Last Updated: <span id="updateTime{{ hashtag['hashtag'] }}">{{ hashtag['updateTime'] | date('Y-m-d H:i:s') }}</span></span>
+                </div>
             </div>
         {% endfor %}
     </div>
@@ -82,6 +92,15 @@
                   + ' ' + date.getHours().toString().padStart(2, "0") + ':'
                   + date.getMinutes().toString().padStart(2, "0") + ':' + date.getSeconds().toString().padStart(2, "0");
                 document.getElementById("tweet"+hashtag.hashtag).innerHTML = '';
+
+                if (hashtag.status === 0) {
+                  document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fas fa-check-circle"></i> All seems fine!';
+                } else if (hashtag.status === 1) {
+                  document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fas fa-ban"></i> Uh-oh! Bad timing to take this line';
+                } else {
+                  document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fas fa-question-circle"></i> I can\'t see if the line is right or wrong...</p>';
+                }
+
                 if (hashtag.lastId) {
                   window.twttr.widgets.createTweet(
                     hashtag.lastId,

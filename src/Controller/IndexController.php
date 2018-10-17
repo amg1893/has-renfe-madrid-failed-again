@@ -59,6 +59,7 @@ class IndexController extends AbstractController
                 foreach ($hashes as $hash) {
                     $hashtags[$hash]->setLastId($tweet->id);
                     $hashtags[$hash]->setDateTweet($tweet->created_at);
+                    $hashtags[$hash]->setStatus($business->analyzeTweet($tweet->text));
                 }
             }
         }
