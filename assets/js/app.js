@@ -13,7 +13,7 @@ require('../css/app.css');
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // var $ = require('jquery');
 
-var axios = require('axios');
+window.axios = require('axios');
 var TwitterWidgetsLoader = require('twitter-widgets');
 
 TwitterWidgetsLoader.load(function(){
