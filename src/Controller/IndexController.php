@@ -42,8 +42,9 @@ class IndexController extends AbstractController
         $latest = $this->getDoctrine()->getRepository(Latest::class)->findAll()[0];
         $hashtags = $this->getDoctrine()->getRepository(HashtagStatus::class)->findAll();
         $tempHashtags = [];
+        /** @var \App\Entity\HashtagStatus $hashtag */
         foreach ($hashtags as $hashtag) {
-            $tempHashtags[$hashtag->hashtag] = $hashtag;
+            $tempHashtags[$hashtag->getHashtag()] = $hashtag;
         }
         $hashtags = $tempHashtags;
         $tweets = $business->getCercaniasTweets($latest->getLastId());
