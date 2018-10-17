@@ -14,7 +14,7 @@ require('../css/app.css');
 // var $ = require('jquery');
 
 var axios = require('axios');
-var twttr = require('twitter-widgets');
+var TwitterWidgetsLoader = require('twitter-widgets');
 
 TwitterWidgetsLoader.load(function(){
   console.log('Twitter loaded');
