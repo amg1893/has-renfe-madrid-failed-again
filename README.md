@@ -22,8 +22,9 @@ To-Do:
 
 ### 0.0.2
 
-To-Do:
-- Change to Flex (update Symfony)
+- Rebase: Symfony framework.
+  - Migrations for the database
+  - ORM with Doctrine
 
 ### 0.0.1
 
