@@ -3,16 +3,24 @@
 {% block title %}Has Renfe Madrid failed again?{% endblock %}
 
 {% block body %}
-<h1>Has Renfe Madrid failed again?</h1>
-<p><span id="update">Update</span></p>
-{% for hashtag in hashtags %}
-    <p>{{ hashtag['name'] }} - Last Updated: <span id="updateTime{{ hashtag['hashtag'] }}">{{ hashtag['updateTime'] | date('Y-m-d H:i:s') }}</span></p>
-    {% if hashtag['lastId'] is not empty %}
-        <span id="tweet{{ hashtag['hashtag'] }}"></span>
-    {% else %}
-        <span id="tweet{{ hashtag['hashtag'] }}"><p>No data for this hashtag</p></span>
-    {% endif %}
-{% endfor %}
+<div class="content pure-g">
+    <div class="pure-u-1">
+        <h1>Has Renfe Madrid failed again?</h1>
+        <p><span id="update">Update</span></p>
+    </div>
+    <div class="pure-u-1">
+        {% for hashtag in hashtags %}
+            <div class="pure-u-1-3 pure-u-1">
+                <p>{{ hashtag['name'] }} - Last Updated: <span id="updateTime{{ hashtag['hashtag'] }}">{{ hashtag['updateTime'] | date('Y-m-d H:i:s') }}</span></p>
+                {% if hashtag['lastId'] is not empty %}
+                    <span id="tweet{{ hashtag['hashtag'] }}"></span>
+                {% else %}
+                    <span id="tweet{{ hashtag['hashtag'] }}"><p>No data for this hashtag</p></span>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
 
 {% block javascripts %}
