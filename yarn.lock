@@ -1481,7 +1481,7 @@ css-color-names@0.0.4:
   resolved "http://registry.npmjs.org/css-color-names/-/css-color-names-0.0.4.tgz#808adc2e79cf84738069b646cb20ec27beb629e0"
   integrity sha1-gIrcLnnPhHOAabZGyyDsJ762KeA=
 
-css-loader@^0.26.2, css-loader@~0.26.1:
+css-loader@^0.26.2:
   version "0.26.4"
   resolved "https://registry.npmjs.org/css-loader/-/css-loader-0.26.4.tgz#b61e9e30db94303e6ffc892f10ecd09ad025a1fd"
   integrity sha1-th6eMNuUMD5v/IkvEOzQmtAlof0=
@@ -2281,15 +2281,6 @@ follow-redirects@^1.0.0, follow-redirects@^1.3.0:
   integrity sha512-Bh65EZI/RU8nx0wbYF9shkFZlqLP+6WT/5FnA3cE/djNSuKNHJEinGGZgu/cQEkeeb2GdFOgenAmn8qaqYke2w==
   dependencies:
     debug "=3.1.0"
-
-font-awesome-webpack@^0.0.5-beta.2:
-  version "0.0.5-beta.2"
-  resolved "https://registry.npmjs.org/font-awesome-webpack/-/font-awesome-webpack-0.0.5-beta.2.tgz#9ea5f22f0615d08e76d8db341563649a726286d6"
-  integrity sha1-nqXyLwYV0I522Ns0FWNkmnJihtY=
-  dependencies:
-    css-loader "~0.26.1"
-    less-loader "~2.2.3"
-    style-loader "~0.13.1"
 
 font-awesome@^4.7.0:
   version "4.7.0"
@@ -3171,13 +3162,6 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-less-loader@~2.2.3:
-  version "2.2.3"
-  resolved "https://registry.npmjs.org/less-loader/-/less-loader-2.2.3.tgz#b6d8f8139c8493df09d992a93a00734b08f84528"
-  integrity sha1-ttj4E5yEk98J2ZKpOgBzSwj4RSg=
-  dependencies:
-    loader-utils "^0.2.5"
-
 load-json-file@^1.0.0:
   version "1.1.0"
   resolved "http://registry.npmjs.org/load-json-file/-/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"
@@ -3203,16 +3187,6 @@ loader-runner@^2.3.0:
   version "2.3.1"
   resolved "https://registry.npmjs.org/loader-runner/-/loader-runner-2.3.1.tgz#026f12fe7c3115992896ac02ba022ba92971b979"
   integrity sha512-By6ZFY7ETWOc9RFaAIb23IjJVcM4dvJC/N57nmdz9RSkMXvAXGI7SyVlAw3v8vjtDRlqThgVDVmTnr9fqMlxkw==
-
-loader-utils@^0.2.5:
-  version "0.2.17"
-  resolved "https://registry.npmjs.org/loader-utils/-/loader-utils-0.2.17.tgz#f86e6374d43205a6e6c60e9196f17c0299bfb348"
-  integrity sha1-+G5jdNQyBabmxg6RlvF8Apm/s0g=
-  dependencies:
-    big.js "^3.1.3"
-    emojis-list "^2.0.0"
-    json5 "^0.5.0"
-    object-assign "^4.0.1"
 
 loader-utils@^1.0.2, loader-utils@^1.1.0:
   version "1.1.0"
@@ -5289,7 +5263,7 @@ strip-json-comments@~2.0.1:
   resolved "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
 
-style-loader@^0.13.2, style-loader@~0.13.1:
+style-loader@^0.13.2:
   version "0.13.2"
   resolved "https://registry.npmjs.org/style-loader/-/style-loader-0.13.2.tgz#74533384cf698c7104c7951150b49717adc2f3bb"
   integrity sha1-dFMzhM9pjHEEx5URULSXF63C87s=
