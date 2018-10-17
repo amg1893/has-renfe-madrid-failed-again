@@ -54,7 +54,7 @@ class IndexController extends AbstractController
         $this->logger->info('Searching tweets with hashtags.');
         foreach ($tweets as $tweet) {
             $tweetHashtags = array_map(function ($value) {return $value->text;}, $tweet->entities->hashtags);
-            $hashtagsToWatch = array_map(function ($value) {return $value->getHashtag();}, $hashtags);
+            $hashtagsToWatch = array_values(array_map(function ($value) {return $value->getHashtag();}, $hashtags));
             if ($hashes = array_intersect($hashtagsToWatch, $tweetHashtags)) {
                 foreach ($hashes as $hash) {
                     $hashtags[$hash]->setLastId($tweet->id);
@@ -66,13 +66,15 @@ class IndexController extends AbstractController
         /** @var \App\Entity\HashtagStatus $hashtag */
         foreach ($hashtags as $hashtag) {
             $hashtag->updateTime();
-            $entityManager->persist($hashtag);
+            $entityManager->merge($hashtag);
         }
         $this->logger->info('Updating latest tweet.');
         $lastTweet = end($tweets);
         $latest->setLastId($lastTweet->id);
         $latest->setDateTweet($lastTweet->created_at);
-        $entityManager->persist($latest);
+        $entityManager->merge($latest);
+
+        $entityManager->flush();
 
         return $this->json(['result' => true]);
     }
