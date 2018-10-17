@@ -70,6 +70,6 @@ class IndexController extends AbstractController
         $latest->setDateTweet($lastTweet->created_at);
         $entityManager->persist($latest);
 
-        return $app->json(['result' => true]);
+        return $this->json(['result' => true]);
     }
 }
