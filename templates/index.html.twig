@@ -18,11 +18,11 @@
                     <span>{{ hashtag['name'] }}</span>
                     {% if hashtag['lastId'] is not empty %}
                         {% if hashtag['status'] == 0 %}
-                            <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fas fa-check-circle"></i> All seems fine!</p>
+                            <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fa fa-check-circle"></i> All seems fine!</p>
                         {% elseif hashtag['status'] == 1 %}
-                            <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fas fa-ban"></i> Uh-oh! Bad timing to take this line</p>
+                            <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fa fa-ban"></i> Uh-oh! Bad timing to take this line</p>
                         {% else %}
-                            <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fas fa-question-circle"></i> I can't see if the line is right or wrong...</p>
+                            <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fa fa-question-circle"></i> I can't see if the line is right or wrong...</p>
                         {% endif %}
                         <div id="tweet{{ hashtag['hashtag'] }}"></div>
                     {% else %}
@@ -94,11 +94,11 @@
                 document.getElementById("tweet"+hashtag.hashtag).innerHTML = '';
 
                 if (hashtag.status === 0) {
-                  document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fas fa-check-circle"></i> All seems fine!';
+                  document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fa fa-check-circle"></i> All seems fine!';
                 } else if (hashtag.status === 1) {
-                  document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fas fa-ban"></i> Uh-oh! Bad timing to take this line';
+                  document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fa fa-ban"></i> Uh-oh! Bad timing to take this line';
                 } else {
-                  document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fas fa-question-circle"></i> I can\'t see if the line is right or wrong...</p>';
+                  document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fa fa-question-circle"></i> I can\'t see if the line is right or wrong...</p>';
                 }
 
                 if (hashtag.lastId) {
