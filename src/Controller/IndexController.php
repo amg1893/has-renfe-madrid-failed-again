@@ -69,10 +69,12 @@ class IndexController extends AbstractController
             $entityManager->merge($hashtag);
         }
         $this->logger->info('Updating latest tweet.');
-        $lastTweet = end($tweets);
-        $latest->setLastId($lastTweet->id);
-        $latest->setDateTweet($lastTweet->created_at);
-        $entityManager->merge($latest);
+        if (count($tweets) > 0) {
+            $lastTweet = end($tweets);
+            $latest->setLastId($lastTweet->id);
+            $latest->setDateTweet($lastTweet->created_at);
+            $entityManager->merge($latest);
+        }
 
         $entityManager->flush();
 
