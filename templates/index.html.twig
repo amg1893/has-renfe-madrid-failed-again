@@ -16,9 +16,9 @@
             <div class="hashtag pure-u-1-2 pure-u-md-1">
                 <p>{{ hashtag['name'] }} - Last Updated: <span id="updateTime{{ hashtag['hashtag'] }}">{{ hashtag['updateTime'] | date('Y-m-d H:i:s') }}</span></p>
                 {% if hashtag['lastId'] is not empty %}
-                    <span id="tweet{{ hashtag['hashtag'] }}"></span>
+                    <div id="tweet{{ hashtag['hashtag'] }}"></div>
                 {% else %}
-                    <span id="tweet{{ hashtag['hashtag'] }}"><p>No data for this hashtag</p></span>
+                    <div id="tweet{{ hashtag['hashtag'] }}"><p>No data for this hashtag</p></div>
                 {% endif %}
             </div>
         {% endfor %}
@@ -37,6 +37,10 @@
               );
         {% endif %}
     {% endfor %}
+
+    document.getElementById('alert').onclick = function() {
+      document.getElementById('alert').style.display = 'none';
+    };
   };
 
   var showErrorFunction = function() {
@@ -86,14 +90,14 @@
               });
               document.getElementById('updateIcon').classList.remove('fa-spin');
             })
-            .catch(function(e) {
+            .catch(function() {
               showErrorFunction();
             });
         } else {
           showErrorFunction();
         }
       })
-      .catch(function(e) {
+      .catch(function() {
         showErrorFunction();
       });
   }

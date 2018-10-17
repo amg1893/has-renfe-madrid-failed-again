@@ -34,9 +34,6 @@
     top: 40px;
     width: 0;
 }
-#alert:target {
-    display: none;
-}
 .alert {
     background-color: #c4453c;
     background-image: -webkit-linear-gradient(135deg, transparent,
