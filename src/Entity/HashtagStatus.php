@@ -27,7 +27,7 @@ class HashtagStatus extends AbstractEntity
     private $hashtag;
 
     /**
-     * @ORM\Column(type="bigint", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $last_id;
 
@@ -70,12 +70,12 @@ class HashtagStatus extends AbstractEntity
         return $this;
     }
 
-    public function getLastId(): ?int
+    public function getLastId(): ?string
     {
         return $this->last_id;
     }
 
-    public function setLastId(?int $last_id): self
+    public function setLastId(?string $last_id): self
     {
         $this->last_id = $last_id;
 
