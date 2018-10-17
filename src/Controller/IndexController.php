@@ -37,7 +37,7 @@ class IndexController extends AbstractController
     {
         $this->logger->info('Initializing Twitter Business.');
         $business = new TwitterBusiness();
-        $this->logger->info('Getting latest tweet.');
+        $this->logger->info('Getting latest tweet and hashtags.');
         /** @var Latest $latest */
         $latest = $this->getDoctrine()->getRepository(Latest::class)->findAll()[0];
         $hashtags = $this->getDoctrine()->getRepository(HashtagStatus::class)->findAll();
@@ -47,9 +47,11 @@ class IndexController extends AbstractController
             $tempHashtags[$hashtag->getHashtag()] = $hashtag;
         }
         $hashtags = $tempHashtags;
+        $this->logger->info('Getting tweets.');
         $tweets = $business->getCercaniasTweets($latest->getLastId());
         $entityManager = $this->getDoctrine()->getManager();
 
+        $this->logger->info('Searching tweets with hashtags.');
         foreach ($tweets as $tweet) {
             $tweetHashtags = array_map(function ($value) {return $value->text;}, $tweet->entities->hashtags);
             $hashtagsToWatch = array_map(function ($value) {return $value->getHashtag();}, $hashtags);
@@ -60,11 +62,13 @@ class IndexController extends AbstractController
                 }
             }
         }
+        $this->logger->info('Updating hashtags in database.');
         /** @var \App\Entity\HashtagStatus $hashtag */
         foreach ($hashtags as $hashtag) {
             $hashtag->updateTime();
             $entityManager->persist($hashtag);
         }
+        $this->logger->info('Updating latest tweet.');
         $lastTweet = end($tweets);
         $latest->setLastId($lastTweet->id);
         $latest->setDateTweet($lastTweet->created_at);
