@@ -36,7 +36,10 @@
             .then(function(res){
               var getRes = res.data;
               getRes.hashtags.forEach(function(hashtag) {
-                document.getElementById('updateTime'+hashtag.hashtag).innerHTML = hashtag.updateTime;
+                var date = new Date(hashtag.updateTime.date);
+                var dateString = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDay()
+                    + ' ' + date.getHours() + ':' + date.getMinutes() + ':' date.getSeconds();
+                document.getElementById('updateTime'+hashtag.hashtag).innerHTML = dateString;
                 document.getElementById("tweet"+hashtag.hashtag).innerHTML = '';
                 if (hashtag.lastId) {
                   twttr.widgets.createTweet(
