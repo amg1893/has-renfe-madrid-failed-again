@@ -7,11 +7,11 @@
     <a class="alert" href="#alert"></a>
 </div>
 <div class="content pure-g">
-    <div class="header pure-u-1">
+    <div class="header">
         <h1>Has Renfe Madrid failed again?</h1>
         <button class="pure-button pure-button-primary" id="update"><i id="updateIcon" class="fa fa-refresh"></i> Update</button>
     </div>
-    <div class="pure-u-1">
+    <div>
         {% for hashtag in hashtags %}
             <div class="hashtag pure-u-1-2 pure-u-md-1">
                 <p>{{ hashtag['name'] }} - Last Updated: <span id="updateTime{{ hashtag['hashtag'] }}">{{ hashtag['updateTime'] | date('Y-m-d H:i:s') }}</span></p>
