@@ -10,7 +10,7 @@
         <script>
           twttr.widgets.createTweet(
             "{{ hashtag['lastId'] }}",
-            document.getElementById("tweet{{ hashtag['hashtag'] }}"),
+            document.getElementById("tweet{{ hashtag['hashtag'] }}")
           );
         </script>
     {% else %}
@@ -44,8 +44,8 @@
                 document.getElementById("tweet"+hashtag.hashtag).innerHTML = '';
                 if (hashtag.lastId) {
                   twttr.widgets.createTweet(
-                    hashtag.lastId.toString(),
-                    document.getElementById("tweet"+hashtag.hashtag),
+                    hashtag.lastId,
+                    document.getElementById("tweet"+hashtag.hashtag)
                   );
                 } else {
                   document.getElementById("tweet"+hashtag.hashtag).innerHTML = '<p>No data for this hashtag</p>';
