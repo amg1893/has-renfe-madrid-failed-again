@@ -44,7 +44,7 @@
                 document.getElementById("tweet"+hashtag.hashtag).innerHTML = '';
                 if (hashtag.lastId) {
                   twttr.widgets.createTweet(
-                    hashtag.lastId,
+                    hashtag.lastId.toString(),
                     document.getElementById("tweet"+hashtag.hashtag),
                   );
                 } else {
