@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "axios": "^0.18.0",
+        "purecss": "^1.0.0",
         "twitter-widgets": "^2.0.0"
     }
 }
