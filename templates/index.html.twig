@@ -46,6 +46,7 @@
   };
 
   var updateButtonFunction = function() {
+    document.getElementById('updateIcon').classList.add('fa-spin');
     document.getElementById('update').classList.add('pure-button-disabled');
     setTimeout(function() {
       document.getElementById('update').classList.remove('pure-button-disabled');
@@ -53,7 +54,7 @@
   };
 
   document.getElementById('update').onclick = function() {
-    document.getElementById('updateIcon').classList.add('fa-spin');
+    updateButtonFunction();
     axios.get('/update')
       .then(function(res) {
         var updateRes = res.data;
