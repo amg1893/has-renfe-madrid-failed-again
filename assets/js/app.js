@@ -17,5 +17,6 @@ var axios = require('axios');
 var twttr = require('twitter-widgets');
 
 TwitterWidgetsLoader.load(function(){
-  console.log('Twitter loaded')
+  console.log('Twitter loaded');
+  document.init();
 });

@@ -9,12 +9,6 @@
     <p>{{ hashtag['name'] }} - Last Updated: <span id="updateTime{{ hashtag['hashtag'] }}">{{ hashtag['updateTime'] | date('Y-m-d H:i:s') }}</span></p>
     {% if hashtag['lastId'] is not empty %}
         <span id="tweet{{ hashtag['hashtag'] }}"></span>
-        <script>
-          twttr.widgets.createTweet(
-            "{{ hashtag['lastId'] }}",
-            document.getElementById("tweet{{ hashtag['hashtag'] }}")
-          );
-        </script>
     {% else %}
         <span id="tweet{{ hashtag['hashtag'] }}"><p>No data for this hashtag</p></span>
     {% endif %}
@@ -23,6 +17,16 @@
 
 {% block javascripts %}
 <script>
+  document.init = function() {
+    {% for hashtag in hashtags %}
+        {% if hashtag['lastId'] is not empty %}
+              window.twttr.widgets.createTweet(
+                "{{ hashtag['lastId'] }}",
+                document.getElementById("tweet{{ hashtag['hashtag'] }}")
+              );
+        {% endif %}
+    {% endfor %}
+  };
   document.getElementById('update').onclick = function() {
     axios.get('/update')
       .then(function(res) {
@@ -45,7 +49,7 @@
                   + date.getMinutes().toString().padStart(2, "0") + ':' + date.getSeconds().toString().padStart(2, "0");
                 document.getElementById("tweet"+hashtag.hashtag).innerHTML = '';
                 if (hashtag.lastId) {
-                  twttr.widgets.createTweet(
+                  window.twttr.widgets.createTweet(
                     hashtag.lastId,
                     document.getElementById("tweet"+hashtag.hashtag)
                   );
