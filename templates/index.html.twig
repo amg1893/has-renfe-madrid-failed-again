@@ -10,7 +10,7 @@
     </div>
     <div class="pure-u-1">
         {% for hashtag in hashtags %}
-            <div class="pure-u-1-3 pure-u-1">
+            <div class="pure-u-1-3 pure-u-md-1">
                 <p>{{ hashtag['name'] }} - Last Updated: <span id="updateTime{{ hashtag['hashtag'] }}">{{ hashtag['updateTime'] | date('Y-m-d H:i:s') }}</span></p>
                 {% if hashtag['lastId'] is not empty %}
                     <span id="tweet{{ hashtag['hashtag'] }}"></span>
