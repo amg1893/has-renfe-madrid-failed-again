@@ -6,7 +6,7 @@
  */
 
 require('purecss');
-require('font-awesome-webpack');
+require('font-awesome/css/font-awesome.css');
 
 // any CSS you require will output into a single css file (app.css in this case)
 require('../css/app.css');
