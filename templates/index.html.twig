@@ -4,7 +4,7 @@
 <h1>Has Renfe Madrid failed again?</h1>
 <p><span id="update">Update</span></p>
 {% for hashtag in hashtags %}
-    <p>{{ hashtag['name'] }} - Last Updated: <span id="updateTime{{ hashtag['hashtag'] }}">{{ hashtag['updateTime'] }}</span></p>
+    <p>{{ hashtag['name'] }} - Last Updated: <span id="updateTime{{ hashtag['hashtag'] }}">{{ hashtag['updateTime'] | date('Y-m-d H:i:s') }}</span></p>
     {% if hashtag['lastId'] is not empty %}
         <span id="tweet{{ hashtag['hashtag'] }}"></span>
         <script>
