@@ -17,8 +17,8 @@ php -S localhost:9000 -t web
 
 ### 0.0.3
 
-To-Do:
 - Create words list to determine the status of the line.
+- SCSS and front improvements
 
 ### 0.0.2
 
