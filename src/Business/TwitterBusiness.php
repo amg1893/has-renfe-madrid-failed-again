@@ -20,7 +20,7 @@ class TwitterBusiness
     {
         $this->client = new TwitterClient();
         $this->positiveWords = [
-            'reparado',
+            'reparad',
             'subsanad',
             'recuper',
         ];
