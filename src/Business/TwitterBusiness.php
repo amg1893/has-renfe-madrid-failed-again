@@ -62,12 +62,12 @@ class TwitterBusiness
     public function analyzeTweet($text): int
     {
         foreach ($this->positiveWords as $positiveWord) {
-            if (strpos($text, $positiveWord, true) !== false) {
+            if (strpos($text, $positiveWord) !== false) {
                 return TweetStatus::RIGHT;
             }
         }
         foreach ($this->negativeWords as $negativeWord) {
-            if (strpos($text, $negativeWord, true) !== false) {
+            if (strpos($text, $negativeWord) !== false) {
                 return TweetStatus::WRONG;
             }
         }
