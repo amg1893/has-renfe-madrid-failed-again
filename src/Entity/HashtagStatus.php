@@ -42,7 +42,7 @@ class HashtagStatus extends AbstractEntity
     private $update_time;
 
     /**
-     * @ORM\Column(type="integer", length=1, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $status;
 
