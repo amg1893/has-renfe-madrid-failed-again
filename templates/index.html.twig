@@ -24,6 +24,7 @@
                         {% endif %}
                         <div id="tweet{{ hashtag['hashtag'] }}"></div>
                     {% else %}
+                        <p id="tweetStatus{{ hashtag['hashtag'] }}"></p>
                         <div id="tweet{{ hashtag['hashtag'] }}"><p>No data for this hashtag</p></div>
                     {% endif %}
                     <div class="lastUpdate">Last Updated: <span id="updateTime{{ hashtag['hashtag'] }}">{{ hashtag['updateTime'] | date('Y-m-d H:i:s') }}</span></div>
