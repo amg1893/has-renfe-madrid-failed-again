@@ -1,6 +1,7 @@
 #alert {
   position: relative;
   display: none;
+  cursor: pointer;
 }
 #alert:hover:after {
   background: hsla(0,0%,0%,.8);
