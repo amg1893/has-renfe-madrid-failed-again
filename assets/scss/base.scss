@@ -32,11 +32,11 @@
         }
         .cardHeaderMadC3 {
           background-color: #8d009f;
-          color: black;
+          color: white;
         }
         .cardHeaderMadC4 {
           background-color: #00299b;
-          color: black;
+          color: white;
         }
         .cardHeaderMadC5 {
           background-color: #ffb634;
@@ -48,7 +48,7 @@
         }
         .cardHeaderMadC8 {
           background-color: #00872e;
-          color: black;
+          color: white;
         }
         .cardHeaderMadC9 {
           background-color: #f85b29;
@@ -57,6 +57,12 @@
         .cardHeaderMadC10 {
           background-color: #6eb62e;
           color: black;
+        }
+
+        .lastUpdate {
+          font-size: 12px;
+          color: grey;
+          padding-bottom: 10px;
         }
       }
     }
