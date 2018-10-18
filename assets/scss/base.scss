@@ -1,0 +1,28 @@
+/* BASE STYLES */
+
+.content {
+  padding: 10px 25px;
+
+  .header {
+    text-align: center;
+  }
+
+  .hashtags {
+    padding: 20px 0px;
+
+    .hashtag {
+      text-align: center;
+
+      .card {
+        border: 1px solid #eaeaea;
+        box-shadow: 0px 0px 10px 0px rgba(39,49,65,0.1);
+        margin: 10px 10px 20px 10px;
+        padding: 10px;
+      }
+    }
+  }
+}
+
+/* IMPORT STYLES */
+
+@import 'alert';
