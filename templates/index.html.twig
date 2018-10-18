@@ -15,7 +15,7 @@
         {% for hashtag in hashtags %}
             <div class="hashtag pure-u-1 pure-u-lg-1-2">
                 <div class="card">
-                    <span>{{ hashtag['name'] }}</span>
+                    <div class="cardHeader cardHeader{{ hashtag['hashtag'] }}"><span>{{ hashtag['name'] }}</span></div>
                     {% if hashtag['lastId'] is not empty %}
                         {% if hashtag['status'] == 0 %}
                             <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fa fa-check-circle"></i> All seems fine!</p>
