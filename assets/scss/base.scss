@@ -17,7 +17,47 @@
         border: 1px solid #eaeaea;
         box-shadow: 0px 0px 10px 0px rgba(39,49,65,0.1);
         margin: 10px 10px 20px 10px;
-        padding: 10px;
+
+        .cardHeader {
+          padding: 10px;
+        }
+
+        .cardHeaderMadC1 {
+          background-color: #48ade1;
+          color: black;
+        }
+        .cardHeaderMadC2 {
+          background-color: #008931;
+          color: white;
+        }
+        .cardHeaderMadC3 {
+          background-color: #8d009f;
+          color: black;
+        }
+        .cardHeaderMadC4 {
+          background-color: #00299b;
+          color: black;
+        }
+        .cardHeaderMadC5 {
+          background-color: #ffb634;
+          color: black;
+        }
+        .cardHeaderMadC7 {
+          background-color: #e00014;
+          color: black;
+        }
+        .cardHeaderMadC8 {
+          background-color: #00872e;
+          color: black;
+        }
+        .cardHeaderMadC9 {
+          background-color: #f85b29;
+          color: black;
+        }
+        .cardHeaderMadC10 {
+          background-color: #6eb62e;
+          color: black;
+        }
       }
     }
   }
