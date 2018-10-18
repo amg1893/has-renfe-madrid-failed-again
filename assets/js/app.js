@@ -10,7 +10,7 @@ require('purecss/build/grids-responsive-min.css');
 require('font-awesome/css/font-awesome.css');
 
 // any CSS you require will output into a single css file (app.css in this case)
-require('../css/app.css');
+require('../scss/base.scss');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // var $ = require('jquery');
