@@ -16,9 +16,9 @@
                     <div class="cardHeader cardHeader{{ hashtag['hashtag'] }}"><span>{{ hashtag['name'] }}</span></div>
                     {% if hashtag['lastId'] is not empty %}
                         {% if hashtag['status'] == 0 %}
-                            <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fa fa-check-circle"></i> All seems fine!</p>
-                        {% elseif hashtag['status'] == 1 %}
                             <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fa fa-ban"></i> Uh-oh! Bad timing to take this line</p>
+                        {% elseif hashtag['status'] == 1 %}
+                            <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fa fa-check-circle"></i> All seems fine!</p>
                         {% else %}
                             <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fa fa-question-circle"></i> I can't see if the line is right or wrong...</p>
                         {% endif %}
@@ -94,9 +94,9 @@
 
                 if (hashtag.lastId) {
                   if (hashtag.status === 0) {
-                    document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fa fa-check-circle"></i> All seems fine!';
-                  } else if (hashtag.status === 1) {
                     document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fa fa-ban"></i> Uh-oh! Bad timing to take this line';
+                  } else if (hashtag.status === 1) {
+                    document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fa fa-check-circle"></i> All seems fine!';
                   } else {
                     document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fa fa-question-circle"></i> I can\'t see if the line is right or wrong...</p>';
                   }
