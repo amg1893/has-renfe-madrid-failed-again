@@ -13,8 +13,7 @@ class ErrorExceptionListener
     {
         $exception = $event->getException();
 
-        $response = new JsonResponse();
-        $response->setContent([
+        $response = new JsonResponse([
             'result' => false,
             'error' => 'There was an error'
         ]);
