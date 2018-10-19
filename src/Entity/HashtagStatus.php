@@ -46,6 +46,11 @@ class HashtagStatus extends AbstractEntity
      */
     private $status;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $details;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -124,6 +129,18 @@ class HashtagStatus extends AbstractEntity
     public function setStatus(?int $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getDetails(): ?string
+    {
+        return $this->details;
+    }
+
+    public function setDetails(string $details): self
+    {
+        $this->details = $details;
 
         return $this;
     }
