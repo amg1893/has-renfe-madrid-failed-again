@@ -15,7 +15,9 @@
     },
     "dependencies": {
         "axios": "^0.18.0",
+        "dotenv-webpack": "^1.5.7",
         "font-awesome": "^4.7.0",
+        "googletagmanager": "^1.0.2",
         "purecss": "^1.0.0",
         "twitter-widgets": "^2.0.0"
     }
