@@ -1,7 +1,7 @@
 {
     "name": "has-renfe-madrid-failed-again",
     "description": "Provides information about Renfe Cercanias Madrid line status",
-    "version": "0.0.3",
+    "version": "0.1.0",
     "type": "project",
     "license": "proprietary",
     "require": {
