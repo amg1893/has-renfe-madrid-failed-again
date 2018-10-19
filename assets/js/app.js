@@ -19,8 +19,8 @@ window.axios = require('axios');
 var TwitterWidgetsLoader = require('twitter-widgets');
 
 if (process.env.APP_ENV === 'prod') {
-  let gtm = require('googletagmanager');
-  gtm(process.env.GOOGLE_ANALYTICS);
+  let ga = require('universal-ga');
+  ga.initialize(process.env.GOOGLE_ANALYTICS);
 }
 
 TwitterWidgetsLoader.load(function(){
