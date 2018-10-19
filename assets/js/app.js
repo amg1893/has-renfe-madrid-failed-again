@@ -18,6 +18,11 @@ require('../scss/base.scss');
 window.axios = require('axios');
 var TwitterWidgetsLoader = require('twitter-widgets');
 
+if (process.env.APP_ENV === 'prod') {
+  let gtm = require('googletagmanager');
+  gtm(process.env.GOOGLE_ANALYTICS);
+}
+
 TwitterWidgetsLoader.load(function(){
   console.log('Twitter loaded');
   document.init();
