@@ -1,5 +1,13 @@
 /* BASE STYLES */
 
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
 .content {
   padding: 10px 25px;
 
@@ -67,6 +75,10 @@
       }
     }
   }
+}
+
+.footer {
+  background-color: #565D64;
 }
 
 /* IMPORT STYLES */
