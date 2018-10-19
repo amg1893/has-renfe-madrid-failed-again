@@ -2,6 +2,7 @@
 
 namespace App\Business;
 
+use App\Constants\TweetStatus;
 use App\Util\TwitterClient;
 
 class TwitterBusiness
@@ -9,9 +10,27 @@ class TwitterBusiness
     /** @var TwitterClient $client */
     protected $client = null;
 
+    /** @var array $positiveWords */
+    protected $positiveWords = [];
+
+    /** @var array $negativeWords */
+    protected $negativeWords = [];
+
     public function __construct()
     {
         $this->client = new TwitterClient();
+        $this->positiveWords = [
+            'reparad',
+            'subsanad',
+            'recuper',
+        ];
+        $this->negativeWords = [
+            'problema',
+            'demora',
+            'incidencia',
+            'accidente',
+            'catenarias',
+        ];
     }
 
     public function getCercaniasTweets($lastTweetID)
@@ -38,5 +57,20 @@ class TwitterBusiness
         });
 
         return $content;
+    }
+
+    public function analyzeTweet($text): int
+    {
+        foreach ($this->positiveWords as $positiveWord) {
+            if (strpos($text, $positiveWord) !== false) {
+                return TweetStatus::RIGHT;
+            }
+        }
+        foreach ($this->negativeWords as $negativeWord) {
+            if (strpos($text, $negativeWord) !== false) {
+                return TweetStatus::WRONG;
+            }
+        }
+        return TweetStatus::UNKWN;
     }
 }

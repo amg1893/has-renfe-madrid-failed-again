@@ -15,10 +15,14 @@ php -S localhost:9000 -t web
 
 ## Changelog
 
+### 0.1.0
+
+- Added Apache2 pack
+
 ### 0.0.3
 
-To-Do:
 - Create words list to determine the status of the line.
+- SCSS and front improvements
 
 ### 0.0.2
 

@@ -59,6 +59,7 @@ class IndexController extends AbstractController
                 foreach ($hashes as $hash) {
                     $hashtags[$hash]->setLastId($tweet->id);
                     $hashtags[$hash]->setDateTweet($tweet->created_at);
+                    $hashtags[$hash]->setStatus($business->analyzeTweet($tweet->text));
                 }
             }
         }
@@ -69,7 +70,7 @@ class IndexController extends AbstractController
             $entityManager->merge($hashtag);
         }
         $this->logger->info('Updating latest tweet.');
-        if (count($tweets) > 0) {
+        if (\count($tweets) > 0) {
             $lastTweet = end($tweets);
             $latest->setLastId($lastTweet->id);
             $latest->setDateTweet($lastTweet->created_at);

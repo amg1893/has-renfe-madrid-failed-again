@@ -1,6 +1,8 @@
 {
     "devDependencies": {
         "@symfony/webpack-encore": "^0.20.0",
+        "node-sass": "^4.9.4",
+        "sass-loader": "^7.1.0",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -13,6 +15,8 @@
     },
     "dependencies": {
         "axios": "^0.18.0",
+        "font-awesome": "^4.7.0",
+        "purecss": "^1.0.0",
         "twitter-widgets": "^2.0.0"
     }
 }

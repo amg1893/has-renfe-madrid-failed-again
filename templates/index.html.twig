@@ -1,27 +1,76 @@
 {% extends "base.html.twig" %}
 
+{% block title %}Has Renfe Madrid failed again?{% endblock %}
+
 {% block body %}
-<h1>Has Renfe Madrid failed again?</h1>
-<p><span id="update">Update</span></p>
-{% for hashtag in hashtags %}
-    <p>{{ hashtag['name'] }} - Last Updated: <span id="updateTime{{ hashtag['hashtag'] }}">{{ hashtag['updateTime'] | date('Y-m-d H:i:s') }}</span></p>
-    {% if hashtag['lastId'] is not empty %}
-        <span id="tweet{{ hashtag['hashtag'] }}"></span>
-        <script>
-          twttr.widgets.createTweet(
-            "{{ hashtag['lastId'] }}",
-            document.getElementById("tweet{{ hashtag['hashtag'] }}")
-          );
-        </script>
-    {% else %}
-        <span id="tweet{{ hashtag['hashtag'] }}"><p>No data for this hashtag</p></span>
-    {% endif %}
-{% endfor %}
+<div id="alert"><div class="alert"></div></div>
+<div class="content pure-g">
+    <div class="header pure-u-1">
+        <h1>Has Renfe Madrid failed again?</h1>
+        <button class="pure-button pure-button-primary" id="update"><i id="updateIcon" class="fa fa-refresh"></i> Update</button>
+    </div>
+    <div class="hashtags">
+        {% for hashtag in hashtags %}
+            <div class="hashtag pure-u-1 pure-u-lg-1-2">
+                <div class="card">
+                    <div class="cardHeader cardHeader{{ hashtag['hashtag'] }}"><span>{{ hashtag['name'] }}</span></div>
+                    {% if hashtag['lastId'] is not empty %}
+                        {% if hashtag['status'] == 0 %}
+                            <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fa fa-ban"></i> Uh-oh! Bad timing to take this line</p>
+                        {% elseif hashtag['status'] == 1 %}
+                            <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fa fa-check-circle"></i> All seems fine!</p>
+                        {% else %}
+                            <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fa fa-question-circle"></i> I can't see if the line is right or wrong...</p>
+                        {% endif %}
+                        <div id="tweet{{ hashtag['hashtag'] }}"></div>
+                    {% else %}
+                        <p id="tweetStatus{{ hashtag['hashtag'] }}"></p>
+                        <div id="tweet{{ hashtag['hashtag'] }}"><p>No data for this hashtag</p></div>
+                    {% endif %}
+                    <div class="lastUpdate">Last Updated: <span id="updateTime{{ hashtag['hashtag'] }}">{{ hashtag['updateTime'] | date('Y-m-d H:i:s') }}</span></div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
 
 {% block javascripts %}
 <script>
+  document.init = function() {
+    {% for hashtag in hashtags %}
+        {% if hashtag['lastId'] is not empty %}
+              window.twttr.widgets.createTweet(
+                "{{ hashtag['lastId'] }}",
+                document.getElementById("tweet{{ hashtag['hashtag'] }}"),
+                {
+                  align: 'center'
+                }
+              );
+        {% endif %}
+    {% endfor %}
+
+    document.getElementById('alert').onclick = function() {
+      document.getElementById('alert').style.display = 'none';
+    };
+  };
+
+  var showErrorFunction = function() {
+    document.getElementById('updateIcon').classList.remove('fa-spin');
+    document.getElementById('alert').querySelector('.alert').innerHTML = 'There was an error updating the tweets';
+    document.getElementById('alert').style.display = 'block';
+  };
+
+  var updateButtonFunction = function() {
+    document.getElementById('updateIcon').classList.add('fa-spin');
+    document.getElementById('update').classList.add('pure-button-disabled');
+    setTimeout(function() {
+      document.getElementById('update').classList.remove('pure-button-disabled');
+    }, 30000);
+  };
+
   document.getElementById('update').onclick = function() {
+    updateButtonFunction();
     axios.get('/update')
       .then(function(res) {
         var updateRes = res.data;
@@ -42,17 +91,38 @@
                   + ' ' + date.getHours().toString().padStart(2, "0") + ':'
                   + date.getMinutes().toString().padStart(2, "0") + ':' + date.getSeconds().toString().padStart(2, "0");
                 document.getElementById("tweet"+hashtag.hashtag).innerHTML = '';
+
                 if (hashtag.lastId) {
-                  twttr.widgets.createTweet(
+                  if (hashtag.status === 0) {
+                    document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fa fa-ban"></i> Uh-oh! Bad timing to take this line';
+                  } else if (hashtag.status === 1) {
+                    document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fa fa-check-circle"></i> All seems fine!';
+                  } else {
+                    document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fa fa-question-circle"></i> I can\'t see if the line is right or wrong...</p>';
+                  }
+
+                  window.twttr.widgets.createTweet(
                     hashtag.lastId,
-                    document.getElementById("tweet"+hashtag.hashtag)
+                    document.getElementById("tweet"+hashtag.hashtag),
+                    {
+                      align: 'center'
+                    }
                   );
                 } else {
                   document.getElementById("tweet"+hashtag.hashtag).innerHTML = '<p>No data for this hashtag</p>';
                 }
               });
+              document.getElementById('updateIcon').classList.remove('fa-spin');
+            })
+            .catch(function() {
+              showErrorFunction();
             });
+        } else {
+          showErrorFunction();
         }
+      })
+      .catch(function() {
+        showErrorFunction();
       });
   }
 </script>
