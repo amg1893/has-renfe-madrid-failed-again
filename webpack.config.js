@@ -1,5 +1,4 @@
 var Encore = require('@symfony/webpack-encore');
-var webpack = require('webpack');
 
 Encore
     // directory where compiled assets will be stored
@@ -36,7 +35,7 @@ Encore
     .enableVersioning(Encore.isProduction())
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
