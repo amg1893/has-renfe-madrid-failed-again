@@ -78,7 +78,29 @@
 }
 
 .footer {
-  background-color: #565D64;
+  background-color: #A7A7A7;
+  padding: 20px 10px;
+  color: white;
+  font-size: 12px;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .license {
+    display: flex;
+    align-items: center;
+  }
+
+  .social {
+    font-size: 20px;
+  }
 }
 
 /* IMPORT STYLES */
