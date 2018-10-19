@@ -12,25 +12,3 @@ This application requires a MySQL database. The structure and basic data are pro
 composer install
 php -S localhost:9000 -t web
 ```
-
-## Changelog
-
-### 0.1.0
-
-- Added Apache2 pack
-
-### 0.0.3
-
-- Create words list to determine the status of the line.
-- SCSS and front improvements
-
-### 0.0.2
-
-- Rebase: Symfony framework.
-  - Migrations for the database
-  - ORM with Doctrine
-
-### 0.0.1
-
-- Checks tweets from @cercaniasmadrid with the hashtags from database.
-- Silex base.

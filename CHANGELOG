@@ -1,0 +1,24 @@
+# 0.1.1
+
+- Added LICENSE and footer to webpage
+- Added Google Analytics
+
+# 0.1.0
+
+- Added Apache2 pack
+
+# 0.0.3
+
+- Create words list to determine the status of the line.
+- SCSS and front improvements
+
+# 0.0.2
+
+- Rebase: Symfony framework.
+  - Migrations for the database
+  - ORM with Doctrine
+
+# 0.0.1
+
+- Checks tweets from @cercaniasmadrid with the hashtags from database.
+- Silex base.
