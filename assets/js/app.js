@@ -33,10 +33,8 @@ TwitterWidgetsLoader.load(function(){
 //This is the service worker with the Cache-first network
 
 //Add this below content to your HTML page, or add the js file to your page at the very top to register service worker
-if (typeof navigator['serviceWorker']['controller'] !== 'undefined') {
-  console.log('[PWA Builder] active service worker found, no need to register')
-} else {
-//Register the ServiceWorker
+if ('serviceWorker' in navigator) {
+  //Register the ServiceWorker
   navigator.serviceWorker.register('sw.js', {
     scope: './'
   }).then(function(reg) {
