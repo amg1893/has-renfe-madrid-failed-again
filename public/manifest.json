@@ -7,7 +7,7 @@
     "background_color": "#111111",
     "icons": [
       {
-        "src": "icon-144.png",
+        "src": "build/images/icon_144.png",
         "sizes": "144x144",
         "type": "image/png"
       }
