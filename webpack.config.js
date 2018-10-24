@@ -93,7 +93,8 @@ config.plugins.push(new OfflinePlugin({
             '*.json',
             '*.css',
             '*.js',
-            'images/*'
+            'images/*',
+            'fonts/*'
         ]
     },
     "ServiceWorker": {
@@ -103,7 +104,7 @@ config.plugins.push(new OfflinePlugin({
         "navigateFallbackURL": '/',
         "minify": !Encore.isProduction(),
         "output": "./sw.js",
-        "scope": "/"
+        "scope": "/build/"
     },
     "AppCache": null
 }));
