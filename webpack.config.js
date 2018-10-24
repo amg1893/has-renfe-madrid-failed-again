@@ -83,7 +83,7 @@ config.plugins.push(new ManifestPlugin({
 }));
 
 // push offline-plugin it must be the last one to use
-/*config.plugins.push(new OfflinePlugin({
+config.plugins.push(new OfflinePlugin({
     "strategy": "changed",
     "responseStrategy": "cache-first",
     "publicPath": "/build/",
@@ -107,7 +107,7 @@ config.plugins.push(new ManifestPlugin({
         "scope": "/"
     },
     "AppCache": null
-}));*/
+}));
 
 
 
