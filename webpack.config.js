@@ -70,7 +70,7 @@ config.plugins.push(new ManifestPlugin({
         "name": "Has Renfe Madrid failed again?",
         "start_url": "/",
         "icons": [{
-                "src": "/images/icon_144.png",
+                "src": "/build/images/icon_144.png",
                 "sizes": "144x144",
                 "type": "image/png"
             }
