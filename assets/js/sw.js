@@ -1,6 +1,7 @@
 var cacheName = 'HRMFA';
 
 self.addEventListener('fetch', (event) => {
+    console.log(event.request.method);
     if (event.request.method === 'GET') {
         event.respondWith(
             caches.match(event.request).then((response) => {
