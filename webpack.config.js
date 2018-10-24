@@ -62,6 +62,25 @@ config.plugins.push(new commonChunk({
     name: 'chunck',
     async: true
 }));
+config.plugins.push(new ManifestPlugin({
+    fileName: 'manifest.json',
+    basePath: '/public/build/',
+    seed: {
+        "short_name": "HRMFA?",
+        "name": "Has Renfe Madrid failed again?",
+        "start_url": "/",
+        "icons": [{
+                "src": "/images/icon_144.png",
+                "sizes": "144x144",
+                "type": "image/png"
+            }
+        ],
+        "background_color": "#FAFAFA",
+        "theme_color": "#e10b0b",
+        "display": "standalone",
+        "orientation": "portrait"
+    }
+}));
 
 // push offline-plugin it must be the last one to use
 config.plugins.push(new OfflinePlugin({
