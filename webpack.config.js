@@ -66,7 +66,7 @@ config.plugins.push(new ManifestPlugin({
     fileName: 'manifest.json',
     basePath: '/public/build/',
     seed: {
-        "short_name": "HRMFA?",
+        "short_name": "HRMFA",
         "name": "Has Renfe Madrid failed again?",
         "start_url": "/",
         "icons": [{
@@ -81,7 +81,6 @@ config.plugins.push(new ManifestPlugin({
         "orientation": "portrait"
     }
 }));
-
 // push offline-plugin it must be the last one to use
 config.plugins.push(new OfflinePlugin({
     "strategy": "changed",
@@ -100,7 +99,7 @@ config.plugins.push(new OfflinePlugin({
     "ServiceWorker": {
         "events": !Encore.isProduction(),
         "entry": "./assets/js/sw.js",
-        "cacheName": "SymfonyVue",
+        "cacheName": "HRMFA",
         "navigateFallbackURL": '/',
         "minify": !Encore.isProduction(),
         "output": "./sw.js",
