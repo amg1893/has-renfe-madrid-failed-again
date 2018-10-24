@@ -1,6 +1,13 @@
 var Encore = require('@symfony/webpack-encore');
 var Dotenv = require('dotenv-webpack');
 
+// require offline-plugin
+var OfflinePlugin = require('offline-plugin');
+// manifest plugin
+var ManifestPlugin = require('webpack-manifest-plugin');
+var commonChunk = require("webpack/lib/optimize/CommonsChunkPlugin");
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+
 Encore
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
@@ -19,7 +26,11 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .addPlugin(new Dotenv())
+    .addPlugin(new CopyWebpackPlugin([
+        { from: './assets/img', to: 'images' }
+    ]))
     .addEntry('app', './assets/js/app.js')
+    .addEntry('sw', './assets/js/sw.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
@@ -46,4 +57,58 @@ Encore
     //.autoProvidejQuery()
 ;
 
-module.exports = Encore.getWebpackConfig();
+var config = Encore.getWebpackConfig();
+config.plugins.push(new commonChunk({
+    name: 'chunck',
+    async: true
+}));
+config.plugins.push(new ManifestPlugin({
+    fileName: 'manifest.json',
+    basePath: '/public/build/',
+    seed: {
+        "short_name": "HRMFA?",
+        "name": "Has Renfe Madrid failed again?",
+        "start_url": "/",
+        "icons": [{
+                "src": "/icon_144.png",
+                "sizes": "144x144",
+                "type": "image/png"
+            }
+        ],
+        "background_color": "#FAFAFA",
+        "theme_color": "#e10b0b",
+        "display": "standalone",
+        "orientation": "portrait"
+    }
+}));
+
+// push offline-plugin it must be the last one to use
+config.plugins.push(new OfflinePlugin({
+    "strategy": "changed",
+    "responseStrategy": "cache-first",
+    "publicPath": "/build/",
+    "caches": {
+        // offline plugin doesn't know about build folder
+        // if I added build in it , it will show something like : OfflinePlugin: Cache pattern [build/images/*] did not match any assets
+        "main": [
+            '*.json',
+            '*.css',
+            '*.js',
+            'images/*'
+        ]
+    },
+    "ServiceWorker": {
+        "events": !Encore.isProduction(),
+        "entry": "./assets/js/sw.js",
+        "cacheName": "SymfonyVue",
+        "navigateFallbackURL": '/',
+        "minify": !Encore.isProduction(),
+        "output": "./public/build/sw.js",
+        "scope": "/"
+    },
+    "AppCache": null
+}));
+
+
+
+module.exports = config;
