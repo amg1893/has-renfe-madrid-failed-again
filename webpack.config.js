@@ -103,7 +103,7 @@ config.plugins.push(new OfflinePlugin({
         "cacheName": "SymfonyVue",
         "navigateFallbackURL": '/',
         "minify": !Encore.isProduction(),
-        "output": "./public/build/sw.js",
+        "output": "./sw.js",
         "scope": "/"
     },
     "AppCache": null
