@@ -27,7 +27,7 @@
             "src": "/build/images/icon_512.png",
             "sizes": "512x512",
             "type": "image/png",
-        },
+        }
     ],
     "background_color": "#FAFAFA",
     "theme_color": "#e10b0b",
