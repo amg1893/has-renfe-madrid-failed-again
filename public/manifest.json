@@ -1,0 +1,15 @@
+{
+    "short_name": "HRMFA",
+    "name": "Has Renfe Madrid failed again?",
+    "start_url": "/",
+    "icons": [{
+            "src": "/build/images/icon_144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        }
+    ],
+    "background_color": "#FAFAFA",
+    "theme_color": "#e10b0b",
+    "display": "standalone",
+    "orientation": "portrait"
+}
