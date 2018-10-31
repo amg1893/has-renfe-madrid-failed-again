@@ -15,13 +15,3 @@ self.addEventListener('fetch', function(event) {
     );
   }
 });
-
-let deferredPrompt;
-
-self.addEventListener('beforeinstallprompt', (e) => {
-  console.log('beforeinstallprompt triggered');
-  e.preventDefault();
-  deferredPrompt = e;
-
-  window._showInstallButton();
-});

@@ -34,6 +34,14 @@ TwitterWidgetsLoader.load(function(){
   document.init();
 });
 
+self.addEventListener('beforeinstallprompt', (e) => {
+  console.log('beforeinstallprompt triggered');
+  e.preventDefault();
+  deferredPrompt = e;
+
+  window._showInstallButton();
+});
+
 window._showInstallButton = function () {
   installButton = document.getElementById('installButton');
   installButton.style.display = 'inline-block;';
@@ -47,6 +55,7 @@ window._installApp = function () {
     .then((choiceResult) => {
       if (choiceResult.outcome === 'accepted') {
         installButton.style.display = 'none';
+        deferredPrompt = null;
       }
     });
 };
