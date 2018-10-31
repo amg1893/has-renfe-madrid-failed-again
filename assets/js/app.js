@@ -21,6 +21,9 @@ require('../scss/base.scss');
 window.axios = require('axios');
 var TwitterWidgetsLoader = require('twitter-widgets');
 
+let deferredPrompt;
+let installButton;
+
 if (process.env.APP_ENV === 'prod') {
   let ga = require('universal-ga');
   ga.initialize(process.env.GOOGLE_ANALYTICS);
@@ -28,25 +31,16 @@ if (process.env.APP_ENV === 'prod') {
 
 TwitterWidgetsLoader.load(function(){
   console.log('Twitter loaded');
+  installButton = document.getElementById('installButton');
+
+  installButton.addEventListener('click', (e) => {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice
+      .then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          installButton.style.display = 'none';
+        }
+      });
+  });
   document.init();
-});
-
-let deferredPrompt;
-let installButton = document.getElementById('installButton');
-
-self.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-
-  installButton.style.display = 'inline-block;';
-});
-
-installButton.addEventListener('click', (e) => {
-  deferredPrompt.prompt();
-  deferredPrompt.userChoice
-    .then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        installButton.style.display = 'none';
-      }
-    });
 });

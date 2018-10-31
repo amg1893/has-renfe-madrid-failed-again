@@ -15,3 +15,10 @@ self.addEventListener('fetch', function(event) {
     );
   }
 });
+
+self.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  installButton.style.display = 'inline-block;';
+});
