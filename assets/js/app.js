@@ -5,7 +5,8 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
-require('offline-plugin/runtime').install();
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
+OfflinePluginRuntime.install();
 
 require('purecss');
 require('purecss/build/grids-responsive-min.css');

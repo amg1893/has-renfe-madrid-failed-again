@@ -30,7 +30,6 @@ Encore
         { from: './assets/img', to: 'images' }
     ]))
     .addEntry('app', './assets/js/app.js')
-    .addEntry('sw', './assets/js/sw.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
@@ -85,9 +84,11 @@ config.plugins.push(new OfflinePlugin({
         "navigateFallbackURL": '/',
         "minify": !Encore.isProduction(),
         "output": "./sw.js",
-        "scope": "/build/"
+        "scope": "/"
     },
-    "AppCache": null
+    "AppCache": {
+	events: true
+    }
 }));
 
 
