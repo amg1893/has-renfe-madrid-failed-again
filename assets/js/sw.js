@@ -15,23 +15,3 @@ self.addEventListener('fetch', function(event) {
     );
   }
 });
-
-let deferredPrompt;
-let installButton = document.getElementById('installButton');
-
-self.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-
-    installButton.style.display = 'inline-block;';
-});
-
-installButton.addEventListener('click', (e) => {
-  deferredPrompt.prompt();
-  deferredPrompt.userChoice
-    .then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        installButton.style.display = 'none';
-      }
-    });
-});
