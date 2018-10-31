@@ -35,6 +35,7 @@ TwitterWidgetsLoader.load(function(){
 });
 
 window._installApp = function () {
+  console.log('install app');
   deferredPrompt.prompt();
   deferredPrompt.userChoice
     .then((choiceResult) => {
@@ -46,8 +47,9 @@ window._installApp = function () {
 };
 
 window._showInstallButton = function () {
+  console.log('show install button');
   installButton = document.getElementById('installButton');
-  installButton.style.display = 'inline-block;';
+  installButton.style.display = 'inline-block';
 
   installButton.addEventListener('click', window._installApp);
 };
