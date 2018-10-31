@@ -72,7 +72,7 @@ class BasicFixtures extends Fixture
             $hashtagStatus = new HashtagStatus();
             $hashtagStatus->setName($data['name']);
             $hashtagStatus->setDetails($data['details']);
-            $hashtagStatus->setName($data['name']);
+            $hashtagStatus->setHashtag($data['hashtag']);
 
             $manager->persist($hashtagStatus);
         }
