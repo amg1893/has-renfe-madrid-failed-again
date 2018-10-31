@@ -26,7 +26,8 @@ class IndexController extends AbstractController
             ]);
         }
         return $this->render('index.html.twig', [
-            'hashtags' => $hashtags
+            'hashtags' => $hashtags,
+            'version' => $this->getVersion()
         ]);
     }
 
@@ -80,5 +81,11 @@ class IndexController extends AbstractController
         $entityManager->flush();
 
         return $this->json(['result' => true]);
+    }
+
+    protected function getVersion(): string
+    {
+        $composerData = json_decode(file_get_contents($this->kernel->getRootDir().'/../composer.json'), true);
+        return $composerData['version'] ?? '';
     }
 }

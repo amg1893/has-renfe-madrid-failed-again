@@ -1,13 +1,14 @@
 {
     "name": "has-renfe-madrid-failed-again",
     "description": "Provides information about Renfe Cercanias Madrid line status",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "type": "project",
     "license": "proprietary",
     "require": {
         "php": "^7.2.11",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "abraham/twitteroauth": "^0.9.2",
         "symfony/apache-pack": "^1.0",
         "symfony/console": "*",

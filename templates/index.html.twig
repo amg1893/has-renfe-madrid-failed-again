@@ -15,7 +15,7 @@
             <div class="hashtag pure-u-1 pure-u-lg-1-2">
                 <div class="card">
                     <div class="cardHeader cardHeader{{ hashtag['hashtag'] }}"><span>{{ hashtag['name'] }}</span></div>
-                    {% if hashtag['lastId'] is not empty %}
+                    {% if hashtag['lastId'] is not empty and hashtag['dateTweet'] | date('U') > '-1 day' | date('U') %}
                         {% if hashtag['status'] == 0 %}
                             <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fa fa-ban"></i> Uh-oh! Bad timing to take this line</p>
                         {% elseif hashtag['status'] == 1 %}
@@ -40,7 +40,7 @@
 <script>
   document.init = function() {
     {% for hashtag in hashtags %}
-        {% if hashtag['lastId'] is not empty %}
+        {% if hashtag['lastId'] is not empty and hashtag['dateTweet'] | date('U') > '-1 day' | date('U') %}
               window.twttr.widgets.createTweet(
                 "{{ hashtag['lastId'] }}",
                 document.getElementById("tweet{{ hashtag['hashtag'] }}"),
@@ -85,6 +85,7 @@
           })
             .then(function(res){
               var getRes = res.data;
+              var yesterday = new Date(new Date().setDate(new Date().getDate()-1));
               getRes.hashtags.forEach(function(hashtag) {
                 var date = new Date(hashtag.updateTime.date);
                 document.getElementById('updateTime'+hashtag.hashtag).innerHTML = date.getFullYear() + '-'
@@ -93,7 +94,7 @@
                   + date.getMinutes().toString().padStart(2, "0") + ':' + date.getSeconds().toString().padStart(2, "0");
                 document.getElementById("tweet"+hashtag.hashtag).innerHTML = '';
 
-                if (hashtag.lastId) {
+                if (hashtag.lastId && (new Date(hashtag.dateTweet)).getTime() > yesterday.getTime()) {
                   if (hashtag.status === 0) {
                     document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fa fa-ban"></i> Uh-oh! Bad timing to take this line';
                   } else if (hashtag.status === 1) {

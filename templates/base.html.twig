@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="shortcut icon" href="favicon.ico" />
+        <link rel="icon" type="image/png" href="build/images/icon_48.png" />
         <link rel="manifest" href="manifest.json" />
         <link rel="stylesheet" href="{{ asset('build/app.css') }}">
         {% block stylesheets %}{% endblock %}
@@ -15,7 +17,7 @@
         <div class="footer">
             <div class="pure-g">
                 <div class="left license pure-u-1-2">
-                    <span>{{ "now" | date('Y') }} Adrián Mora - <a target="_blank" href="https://github.com/amg1893/has-renfe-madrid-failed-again/blob/master/LICENSE">MIT License</a></span>
+                    <span>{{ "now" | date('Y') }} Adrián Mora - <a target="_blank" href="https://github.com/amg1893/has-renfe-madrid-failed-again/blob/master/LICENSE">MIT License</a> - {{ version }}</span>
                 </div>
                 <div class="right social pure-u-1-2">
                     <a target="_blank" href="https://twitter.com/leakspin_"><i class="fa fa-twitter"></i></a>
