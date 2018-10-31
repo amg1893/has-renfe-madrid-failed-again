@@ -40,7 +40,7 @@
 <script>
   document.init = function() {
     {% for hashtag in hashtags %}
-        {% if hashtag['lastId'] is not empty %}
+        {% if hashtag['lastId'] is not empty and hashtag['dateTweet'] | date('U') > '-1 day' | date('U') %}
               window.twttr.widgets.createTweet(
                 "{{ hashtag['lastId'] }}",
                 document.getElementById("tweet{{ hashtag['hashtag'] }}"),
