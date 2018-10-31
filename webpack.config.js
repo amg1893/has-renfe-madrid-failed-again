@@ -1,6 +1,13 @@
 var Encore = require('@symfony/webpack-encore');
 var Dotenv = require('dotenv-webpack');
 
+// require offline-plugin
+var OfflinePlugin = require('offline-plugin');
+// manifest plugin
+var ManifestPlugin = require('webpack-manifest-plugin');
+var commonChunk = require("webpack/lib/optimize/CommonsChunkPlugin");
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+
 Encore
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
@@ -19,6 +26,9 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .addPlugin(new Dotenv())
+    .addPlugin(new CopyWebpackPlugin([
+        { from: './assets/img', to: 'images' }
+    ]))
     .addEntry('app', './assets/js/app.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
@@ -46,4 +56,41 @@ Encore
     //.autoProvidejQuery()
 ;
 
-module.exports = Encore.getWebpackConfig();
+var config = Encore.getWebpackConfig();
+config.plugins.push(new commonChunk({
+    name: 'chunck',
+    async: true
+}));
+// push offline-plugin it must be the last one to use
+config.plugins.push(new OfflinePlugin({
+    "strategy": "changed",
+    "responseStrategy": "cache-first",
+    "publicPath": "/build/",
+    "caches": {
+        // offline plugin doesn't know about build folder
+        // if I added build in it , it will show something like : OfflinePlugin: Cache pattern [build/images/*] did not match any assets
+        "main": [
+            '*.json',
+            '*.css',
+            '*.js',
+            'images/*',
+            'fonts/*'
+        ]
+    },
+    "ServiceWorker": {
+        "events": !Encore.isProduction(),
+        "entry": "./assets/js/sw.js",
+        "cacheName": "HRMFA",
+        "navigateFallbackURL": '/',
+        "minify": !Encore.isProduction(),
+        "output": "./sw.js",
+        "scope": "/"
+    },
+    "AppCache": {
+	events: true
+    }
+}));
+
+
+
+module.exports = config;
