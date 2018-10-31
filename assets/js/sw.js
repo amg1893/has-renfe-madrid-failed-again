@@ -16,20 +16,22 @@ self.addEventListener('fetch', function(event) {
   }
 });
 
+let deferredPrompt;
+let installButton = document.getElementById('installButton');
+
 self.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
-    let deferredPrompt = e;
-    let installButton = document.getElementById('installButton');
-
-    installButton.addEventListener('click', (e) => {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice
-            .then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                  installButton.style.display = 'none';
-                }
-            });
-    });
+    deferredPrompt = e;
 
     installButton.style.display = 'inline-block;';
+});
+
+installButton.addEventListener('click', (e) => {
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice
+    .then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        installButton.style.display = 'none';
+      }
+    });
 });
