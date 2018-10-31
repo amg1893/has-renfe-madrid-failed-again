@@ -91,6 +91,4 @@ config.plugins.push(new OfflinePlugin({
     }
 }));
 
-
-
 module.exports = config;

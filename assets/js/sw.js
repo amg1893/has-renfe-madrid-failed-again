@@ -18,3 +18,21 @@ self.addEventListener('fetch', (event) => {
         );
     }
 });
+
+self.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    let deferredPrompt = e;
+    let installButton = document.getElementById('installButton');
+
+    installButton.addEventListener('click', (e) => {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice
+            .then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                  installButton.style.display = 'none';
+                }
+            });
+    });
+
+    installButton.style.display = 'inline-block;';
+});
