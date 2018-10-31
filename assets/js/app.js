@@ -34,21 +34,6 @@ TwitterWidgetsLoader.load(function(){
   document.init();
 });
 
-self.addEventListener('beforeinstallprompt', (e) => {
-  console.log('beforeinstallprompt triggered');
-  e.preventDefault();
-  deferredPrompt = e;
-
-  window._showInstallButton();
-});
-
-window._showInstallButton = function () {
-  installButton = document.getElementById('installButton');
-  installButton.style.display = 'inline-block;';
-
-  installButton.addEventListener('click', window._installApp);
-};
-
 window._installApp = function () {
   deferredPrompt.prompt();
   deferredPrompt.userChoice
@@ -59,3 +44,18 @@ window._installApp = function () {
       }
     });
 };
+
+window._showInstallButton = function () {
+  installButton = document.getElementById('installButton');
+  installButton.style.display = 'inline-block;';
+
+  installButton.addEventListener('click', window._installApp);
+};
+
+self.addEventListener('beforeinstallprompt', (e) => {
+  console.log('beforeinstallprompt triggered');
+  e.preventDefault();
+  deferredPrompt = e;
+
+  window._showInstallButton();
+});
