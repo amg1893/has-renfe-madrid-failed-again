@@ -31,16 +31,22 @@ if (process.env.APP_ENV === 'prod') {
 
 TwitterWidgetsLoader.load(function(){
   console.log('Twitter loaded');
-  installButton = document.getElementById('installButton');
-
-  installButton.addEventListener('click', (e) => {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice
-      .then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          installButton.style.display = 'none';
-        }
-      });
-  });
   document.init();
 });
+
+window._showInstallButton = function () {
+  installButton = document.getElementById('installButton');
+  installButton.style.display = 'inline-block;';
+
+  installButton.addEventListener('click', window._installApp);
+};
+
+window._installApp = function () {
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice
+    .then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        installButton.style.display = 'none';
+      }
+    });
+};
