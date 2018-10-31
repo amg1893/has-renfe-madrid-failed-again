@@ -13,6 +13,12 @@
 
   .header {
     text-align: center;
+
+    #installButton {
+      display: none;
+      background: rgb(28, 184, 65);
+      color: white;
+    }
   }
 
   .hashtags {

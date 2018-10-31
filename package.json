@@ -15,10 +15,13 @@
     },
     "dependencies": {
         "axios": "^0.18.0",
+        "copy-webpack-plugin": "^4.5.4",
         "dotenv-webpack": "^1.5.7",
         "font-awesome": "^4.7.0",
+        "offline-plugin": "^5.0.5",
         "purecss": "^1.0.0",
         "twitter-widgets": "^2.0.0",
-        "universal-ga": "^1.2.0"
+        "universal-ga": "^1.2.0",
+        "webpack-manifest-plugin": "^2.0.4"
     }
 }

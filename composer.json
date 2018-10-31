@@ -1,7 +1,7 @@
 {
     "name": "has-renfe-madrid-failed-again",
     "description": "Provides information about Renfe Cercanias Madrid line status",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "type": "project",
     "license": "proprietary",
     "require": {
@@ -20,6 +20,7 @@
         "symfony/yaml": "*"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.0",
         "symfony/dotenv": "*",
         "symfony/maker-bundle": "^1.8"
     },
