@@ -80,10 +80,6 @@
 
         twitterwidget {
           width: 100% !important;
-
-          .EmbeddedTweet {
-            margin: auto;
-          }
         }
 
         .lastUpdate {
@@ -94,6 +90,10 @@
       }
     }
   }
+}
+
+.EmbeddedTweet {
+  margin: auto;
 }
 
 .footer {

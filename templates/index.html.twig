@@ -41,6 +41,7 @@
 
 {% block javascripts %}
 <script>
+  window.styles = document.querySelectorAll('link[rel="stylesheet"]');
   document.init = function() {
     {% for hashtag in hashtags %}
         {% if hashtag['lastId'] is not empty and hashtag['dateTweet'] | date('U') > '-1 day' | date('U') %}
@@ -50,7 +51,16 @@
                 {
                   align: 'center'
                 }
-              );
+              ).then((tweet) => {
+                 let sR = tweet.shadowRoot;
+                 window.styles.forEach((style) => {
+                   console.log('adding style');
+                   let node = document.createElement('style');
+                   node.type = 'text/css';
+                   node.appendChild(document.createTextNode("@import url(\""+style.href+"\");"));
+                   sR.appendChild(node);
+                 });
+              });
         {% endif %}
     {% endfor %}
 
@@ -106,13 +116,22 @@
                     document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fa fa-question-circle"></i> I can\'t see if the line is right or wrong...</p>';
                   }
 
-                  window.twttr.widgets.createTweet(
+                  window['tweet'+hashtag.hashtag] = window.twttr.widgets.createTweet(
                     hashtag.lastId,
                     document.getElementById("tweet"+hashtag.hashtag),
                     {
                       align: 'center'
                     }
-                  );
+                  ).then((tweet) => {
+                    let sR = tweet.shadowRoot;
+                    window.styles.forEach((style) => {
+                      console.log('adding style');
+                      let node = document.createElement('style');
+                      node.type = 'text/css';
+                      node.appendChild(document.createTextNode("@import url(\""+style.href+"\");"));
+                      sR.appendChild(node);
+                    });
+                  });
                 } else {
                   document.getElementById("tweet"+hashtag.hashtag).innerHTML = '<p>No data for this hashtag</p>';
                 }
