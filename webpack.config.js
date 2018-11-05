@@ -4,7 +4,6 @@ var Dotenv = require('dotenv-webpack');
 // require offline-plugin
 var OfflinePlugin = require('offline-plugin');
 // manifest plugin
-var ManifestPlugin = require('webpack-manifest-plugin');
 var commonChunk = require("webpack/lib/optimize/CommonsChunkPlugin");
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
@@ -57,10 +56,12 @@ Encore
 ;
 
 var config = Encore.getWebpackConfig();
+
 config.plugins.push(new commonChunk({
     name: 'chunck',
     async: true
 }));
+
 // push offline-plugin it must be the last one to use
 config.plugins.push(new OfflinePlugin({
     "strategy": "changed",
@@ -87,7 +88,7 @@ config.plugins.push(new OfflinePlugin({
         "scope": "/"
     },
     "AppCache": {
-	events: true
+	      "events": !Encore.isProduction()
     }
 }));
 
