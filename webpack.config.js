@@ -80,11 +80,9 @@ config.plugins.push(new OfflinePlugin({
     },
     "ServiceWorker": {
         "events": !Encore.isProduction(),
-        "entry": "./assets/js/sw.js",
         "cacheName": "HRMFA",
         "navigateFallbackURL": '/',
         "minify": !Encore.isProduction(),
-        "output": "./sw.js",
         "scope": "/"
     },
     "AppCache": {
