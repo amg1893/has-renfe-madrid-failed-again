@@ -6,7 +6,11 @@
  */
 
 import * as OfflinePluginRuntime from 'offline-plugin/runtime';
-OfflinePluginRuntime.install();
+OfflinePluginRuntime.install({
+  onUpdateReady: () => {
+    window._showUpdateButton();
+  }
+});
 
 require('purecss');
 require('purecss/build/grids-responsive-min.css');
@@ -23,6 +27,7 @@ var TwitterWidgetsLoader = require('twitter-widgets');
 
 let deferredPrompt;
 let installButton;
+let updateButton;
 
 if (process.env.APP_ENV === 'prod') {
   let ga = require('universal-ga');
@@ -46,12 +51,25 @@ window._installApp = function () {
     });
 };
 
+window._updateApp = function () {
+  console.log('update app');
+  OfflinePluginRuntime.applyUpdate();
+};
+
 window._showInstallButton = function () {
   console.log('show install button');
   installButton = document.getElementById('installButton');
   installButton.style.display = 'inline-block';
 
   installButton.addEventListener('click', window._installApp);
+};
+
+window._showUpdateButton = function () {
+  console.log('show update button');
+  updateButton = document.getElementById('updateAppButton');
+  updateButton.style.display = 'inline-block';
+
+  updateButton.addEventListener('click', window._updateApp);
 };
 
 self.addEventListener('beforeinstallprompt', (e) => {

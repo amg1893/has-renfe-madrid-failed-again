@@ -4,7 +4,6 @@ var Dotenv = require('dotenv-webpack');
 // require offline-plugin
 var OfflinePlugin = require('offline-plugin');
 // manifest plugin
-var commonChunk = require("webpack/lib/optimize/CommonsChunkPlugin");
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 Encore
@@ -29,8 +28,6 @@ Encore
         { from: './assets/img', to: 'images' }
     ]))
     .addEntry('app', './assets/js/app.js')
-    //.addEntry('page1', './assets/js/page1.js')
-    //.addEntry('page2', './assets/js/page2.js')
 
     /*
      * FEATURE CONFIG
@@ -42,8 +39,6 @@ Encore
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
-    // enables hashed filenames (e.g. app.abc123.css)
-    .enableVersioning(Encore.isProduction())
 
     // enables Sass/SCSS support
     .enableSassLoader()
@@ -53,43 +48,31 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
+
+    .addPlugin(new OfflinePlugin({
+        safeToUseOptionalCaches: true,
+        caches: {
+            main: [
+                '**/*.json',
+                '**/*.css',
+                '**/*.js',
+                '**/images/*',
+            ],
+            additional: [
+                '**/fonts/*'
+            ],
+
+            optional: [
+                ':rest:'
+            ]
+        },
+        ServiceWorker: {
+            "events": !Encore.isProduction()
+        },
+        AppCache: {
+            "events": !Encore.isProduction()
+        }
+    }))
 ;
 
-var config = Encore.getWebpackConfig();
-
-config.plugins.push(new commonChunk({
-    name: 'chunck',
-    async: true
-}));
-
-// push offline-plugin it must be the last one to use
-config.plugins.push(new OfflinePlugin({
-    "strategy": "changed",
-    "responseStrategy": "cache-first",
-    "publicPath": "/build/",
-    "caches": {
-        // offline plugin doesn't know about build folder
-        // if I added build in it , it will show something like : OfflinePlugin: Cache pattern [build/images/*] did not match any assets
-        "main": [
-            '*.json',
-            '*.css',
-            '*.js',
-            'images/*',
-            'fonts/*'
-        ]
-    },
-    "ServiceWorker": {
-        "events": !Encore.isProduction(),
-        "entry": "./assets/js/sw.js",
-        "cacheName": "HRMFA",
-        "navigateFallbackURL": '/',
-        "minify": !Encore.isProduction(),
-        "output": "./sw.js",
-        "scope": "/"
-    },
-    "AppCache": {
-	      "events": !Encore.isProduction()
-    }
-}));
-
-module.exports = config;
+module.exports = Encore.getWebpackConfig();
