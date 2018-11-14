@@ -50,36 +50,30 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
+    .addPlugin(new OfflinePlugin({
+        safeToUseOptionalCaches: true,
+        caches: {
+            main: [
+                '*.json',
+                '*.css',
+                '*.js',
+                'images/*',
+            ],
+            additional: [
+                'fonts/*'
+            ],
+
+            optional: [
+                ':rest:'
+            ]
+        },
+        ServiceWorker: {
+            "events": !Encore.isProduction()
+        },
+        AppCache: {
+            "events": !Encore.isProduction()
+        }
+    }))
 ;
 
-var config = Encore.getWebpackConfig();
-
-// push offline-plugin it must be the last one to use
-config.plugins.push(new OfflinePlugin({
-    safeToUseOptionalCaches: true,
-    "caches": {
-        // offline plugin doesn't know about build folder
-        // if I added build in it , it will show something like : OfflinePlugin: Cache pattern [build/images/*] did not match any assets
-        "main": [
-            '*.json',
-            '*.css',
-            '*.js',
-            'images/*',
-        ],
-        additional: [
-            'fonts/*'
-        ],
-
-        optional: [
-            ':rest:'
-        ]
-    },
-    "ServiceWorker": {
-        "events": !Encore.isProduction()
-    },
-    "AppCache": {
-        "events": !Encore.isProduction()
-    }
-}));
-
-module.exports = config;
+module.exports = Encore.getWebpackConfig();
