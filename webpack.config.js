@@ -39,8 +39,6 @@ Encore
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
-    // enables hashed filenames (e.g. app.abc123.css)
-    .enableVersioning(Encore.isProduction())
 
     // enables Sass/SCSS support
     .enableSassLoader()
@@ -50,17 +48,18 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
+
     .addPlugin(new OfflinePlugin({
         safeToUseOptionalCaches: true,
         caches: {
             main: [
-                '*.json',
-                '*.css',
-                '*.js',
-                'images/*',
+                '**/*.json',
+                '**/*.css',
+                '**/*.js',
+                '**/images/*',
             ],
             additional: [
-                'fonts/*'
+                '**/fonts/*'
             ],
 
             optional: [
