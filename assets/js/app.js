@@ -68,6 +68,8 @@ window._showUpdateButton = function () {
   console.log('show update button');
   updateButton = document.getElementById('updateAppButton');
   updateButton.style.display = 'inline-block';
+
+  updateButton.addEventListener('click', window._updateApp);
 };
 
 self.addEventListener('beforeinstallprompt', (e) => {
