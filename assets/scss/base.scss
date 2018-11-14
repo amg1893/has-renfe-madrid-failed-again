@@ -1,4 +1,8 @@
 /* BASE STYLES */
+body {
+  /* Disables pull-to-refresh but allows overscroll glow effects. */
+  overscroll-behavior-y: contain;
+}
 
 .left {
   text-align: left;
@@ -14,7 +18,7 @@
   .header {
     text-align: center;
 
-    #installButton {
+    #installButton, #updateAppButton {
       display: none;
       background: rgb(28, 184, 65);
       color: white;
