@@ -4,6 +4,10 @@ body {
   overscroll-behavior-y: contain;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
 .left {
   text-align: left;
 }
@@ -12,22 +16,28 @@ body {
   text-align: right;
 }
 
+.header {
+  text-align: center;
+  background: url('/build/images/bg.jpg') no-repeat center top;
+  background-size: cover;
+
+  .bg {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 20px 0;
+  }
+
+  #installButton, #updateAppButton {
+    display: none;
+    background: rgb(28, 184, 65);
+    color: white;
+  }
+}
+
 .content {
   padding: 10px 25px;
 
-  .header {
-    text-align: center;
-
-    #installButton, #updateAppButton {
-      display: none;
-      background: rgb(28, 184, 65);
-      color: white;
-    }
-  }
-
   .hashtags {
     width: 100%;
-    padding: 20px 0px;
 
     .hashtag {
       text-align: center;

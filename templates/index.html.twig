@@ -1,16 +1,19 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Has Renfe Madrid failed again?{% endblock %}
+{% block title %}Renfail{% endblock %}
 
 {% block body %}
 <div id="alert"><div class="alert"></div></div>
-<div class="content pure-g">
-    <div class="header pure-u-1">
-        <h1>Has Renfe Madrid failed again?</h1>
-        <button class="pure-button pure-button-primary" id="updateButton"><i id="updateIcon" class="fa fa-refresh"></i> Update</button>
-        <button class="pure-button" id="installButton"><i id="installIcon" class="fa fa-arrow-circle-down"></i> Install</button>
-        <button class="pure-button" id="updateAppButton"><i id="updateAppIcon" class="fa fa-arrow-circle-down"></i> Update</button>
+<div class="header">
+    <div class="bg">
+      <h1>Renfail</h1>
+      <p>Status of Renfe Cercanías Madrid</p>
+      <button class="pure-button pure-button-primary" id="updateButton"><i id="updateIcon" class="fa fa-refresh"></i> Update</button>
+      <button class="pure-button" id="installButton"><i id="installIcon" class="fa fa-arrow-circle-down"></i> Install</button>
+      <button class="pure-button" id="updateAppButton"><i id="updateAppIcon" class="fa fa-arrow-circle-down"></i> Update</button>
     </div>
+</div>
+<div class="content pure-g">
     <div class="hashtags">
         {% for hashtag in hashtags %}
             <div class="hashtag pure-u-1 pure-u-lg-1-2">
