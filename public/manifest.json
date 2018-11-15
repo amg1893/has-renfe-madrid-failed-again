@@ -1,6 +1,6 @@
 {
-    "short_name": "HRMFA",
-    "name": "Has Renfe Madrid failed again?",
+    "short_name": "Renfail",
+    "name": "Renfail",
     "start_url": "/",
     "icons": [
         {
