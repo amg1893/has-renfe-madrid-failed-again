@@ -1,20 +1,27 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Has Renfe Madrid failed again?{% endblock %}
+{% block title %}Renfail{% endblock %}
 
 {% block body %}
 <div id="alert"><div class="alert"></div></div>
-<div class="content pure-g">
-    <div class="header pure-u-1">
-        <h1>Has Renfe Madrid failed again?</h1>
-        <button class="pure-button pure-button-primary" id="updateButton"><i id="updateIcon" class="fa fa-refresh"></i> Update</button>
-        <button class="pure-button" id="installButton"><i id="installIcon" class="fa fa-arrow-circle-down"></i> Install</button>
+<div class="header">
+    <div class="bg">
+      <h1>Renfail</h1>
+      <p>Status of Renfe Cercanías Madrid</p>
+      <button class="pure-button pure-button-primary" id="updateButton"><i id="updateIcon" class="fa fa-refresh"></i> Update</button>
+      <button class="pure-button" id="installButton"><i id="installIcon" class="fa fa-arrow-circle-down"></i> Install</button>
+      <button class="pure-button" id="updateAppButton"><i id="updateAppIcon" class="fa fa-arrow-circle-down"></i> Update</button>
     </div>
+</div>
+<div class="content pure-g">
     <div class="hashtags">
         {% for hashtag in hashtags %}
             <div class="hashtag pure-u-1 pure-u-lg-1-2">
                 <div class="card">
-                    <div class="cardHeader cardHeader{{ hashtag['hashtag'] }}"><span>{{ hashtag['name'] }}</span></div>
+                    <div class="cardHeader cardHeader{{ hashtag['hashtag'] }}">
+                        <p>{{ hashtag['name'] }}</p>
+                        <p>{{ hashtag['details'] }}</p>
+                    </div>
                     {% if hashtag['lastId'] is not empty and hashtag['dateTweet'] | date('U') > '-1 day' | date('U') %}
                         {% if hashtag['status'] == 0 %}
                             <p id="tweetStatus{{ hashtag['hashtag'] }}"><i class="fa fa-ban"></i> Uh-oh! Bad timing to take this line</p>
@@ -38,6 +45,7 @@
 
 {% block javascripts %}
 <script>
+  window.styles = document.querySelectorAll('link[rel="stylesheet"]');
   document.init = function() {
     {% for hashtag in hashtags %}
         {% if hashtag['lastId'] is not empty and hashtag['dateTweet'] | date('U') > '-1 day' | date('U') %}
@@ -47,7 +55,16 @@
                 {
                   align: 'center'
                 }
-              );
+              ).then((tweet) => {
+                 let sR = tweet.shadowRoot;
+                 window.styles.forEach((style) => {
+                   console.log('adding style');
+                   let node = document.createElement('style');
+                   node.type = 'text/css';
+                   node.appendChild(document.createTextNode("@import url(\""+style.href+"\");"));
+                   sR.appendChild(node);
+                 });
+              });
         {% endif %}
     {% endfor %}
 
@@ -103,13 +120,22 @@
                     document.getElementById("tweetStatus"+hashtag.hashtag).innerHTML = '<i class="fa fa-question-circle"></i> I can\'t see if the line is right or wrong...</p>';
                   }
 
-                  window.twttr.widgets.createTweet(
+                  window['tweet'+hashtag.hashtag] = window.twttr.widgets.createTweet(
                     hashtag.lastId,
                     document.getElementById("tweet"+hashtag.hashtag),
                     {
                       align: 'center'
                     }
-                  );
+                  ).then((tweet) => {
+                    let sR = tweet.shadowRoot;
+                    window.styles.forEach((style) => {
+                      console.log('adding style');
+                      let node = document.createElement('style');
+                      node.type = 'text/css';
+                      node.appendChild(document.createTextNode("@import url(\""+style.href+"\");"));
+                      sR.appendChild(node);
+                    });
+                  });
                 } else {
                   document.getElementById("tweet"+hashtag.hashtag).innerHTML = '<p>No data for this hashtag</p>';
                 }

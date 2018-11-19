@@ -1,4 +1,12 @@
 /* BASE STYLES */
+body {
+  /* Disables pull-to-refresh but allows overscroll glow effects. */
+  overscroll-behavior-y: contain;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
 
 .left {
   text-align: left;
@@ -8,21 +16,28 @@
   text-align: right;
 }
 
+.header {
+  text-align: center;
+  background: url('/build/images/bg.jpg') no-repeat center top;
+  background-size: cover;
+
+  .bg {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 20px 0;
+  }
+
+  #installButton, #updateAppButton {
+    display: none;
+    background: rgb(28, 184, 65);
+    color: white;
+  }
+}
+
 .content {
   padding: 10px 25px;
 
-  .header {
-    text-align: center;
-
-    #installButton {
-      display: none;
-      background: rgb(28, 184, 65);
-      color: white;
-    }
-  }
-
   .hashtags {
-    padding: 20px 0px;
+    width: 100%;
 
     .hashtag {
       text-align: center;
@@ -34,6 +49,10 @@
 
         .cardHeader {
           padding: 10px;
+
+          p {
+            margin: 0;
+          }
         }
 
         .cardHeaderMadC1 {
@@ -58,7 +77,7 @@
         }
         .cardHeaderMadC7 {
           background-color: #e00014;
-          color: black;
+          color: white;
         }
         .cardHeaderMadC8 {
           background-color: #00872e;
@@ -66,11 +85,15 @@
         }
         .cardHeaderMadC9 {
           background-color: #f85b29;
-          color: black;
+          color: white;
         }
         .cardHeaderMadC10 {
           background-color: #6eb62e;
           color: black;
+        }
+
+        twitterwidget {
+          width: 100% !important;
         }
 
         .lastUpdate {
@@ -81,6 +104,10 @@
       }
     }
   }
+}
+
+.EmbeddedTweet {
+  margin: auto;
 }
 
 .footer {
